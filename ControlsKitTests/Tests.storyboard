@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="edq-sK-u6B">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Test View Controller-->
+        <scene sceneID="bU1-dO-vq8">
+            <objects>
+                <viewController storyboardIdentifier="TestsViewControllerID" id="oT9-td-o2y" customClass="TestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Abk-uy-27E"/>
+                        <viewControllerLayoutGuide type="bottom" id="Z26-t1-lbu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CBB-Hi-1nm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hch-PM-vhO" customClass="CTKSwitch">
+                                <rect key="frame" x="163.5" y="64" width="51" height="31"/>
+                            </switch>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4E-Qk-AJ2" customClass="NibViewTest">
+                                <rect key="frame" x="68" y="95" width="240" height="128"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YKm-ic-E7t" customClass="CTKPlaceholderTextView">
+                                <rect key="frame" x="68" y="223" width="240" height="68"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAS-5o-v6y" customClass="CTKPageControl">
+                                <rect key="frame" x="0.5" y="291" width="374.5" height="376"/>
+                                <color key="backgroundColor" red="0.95862201793498836" green="0.96358935885044039" blue="0.98750400543212891" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="eAS-5o-v6y" firstAttribute="top" secondItem="YKm-ic-E7t" secondAttribute="bottom" id="D3h-yb-Sz6"/>
+                            <constraint firstItem="YKm-ic-E7t" firstAttribute="centerX" secondItem="i4E-Qk-AJ2" secondAttribute="centerX" id="Ftf-Pj-VU1"/>
+                            <constraint firstItem="hch-PM-vhO" firstAttribute="top" secondItem="Abk-uy-27E" secondAttribute="bottom" id="Hms-lJ-2Rd"/>
+                            <constraint firstItem="i4E-Qk-AJ2" firstAttribute="centerX" secondItem="hch-PM-vhO" secondAttribute="centerX" id="Ssx-LS-kIJ"/>
+                            <constraint firstItem="YKm-ic-E7t" firstAttribute="top" secondItem="i4E-Qk-AJ2" secondAttribute="bottom" id="e28-oZ-Vqf"/>
+                            <constraint firstItem="eAS-5o-v6y" firstAttribute="top" secondItem="YKm-ic-E7t" secondAttribute="bottom" id="mVT-mj-FsV"/>
+                            <constraint firstItem="i4E-Qk-AJ2" firstAttribute="top" secondItem="hch-PM-vhO" secondAttribute="bottom" id="u1n-11-N4q"/>
+                            <constraint firstItem="eAS-5o-v6y" firstAttribute="centerX" secondItem="YKm-ic-E7t" secondAttribute="centerX" id="vl0-nQ-qaj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="WqU-hD-6dC"/>
+                    <connections>
+                        <outlet property="testNibView" destination="i4E-Qk-AJ2" id="ku2-Z8-rrX"/>
+                        <outlet property="testPageControl" destination="eAS-5o-v6y" id="bfY-Nr-P6Q"/>
+                        <outlet property="testPlaceholderTextView" destination="YKm-ic-E7t" id="9Ls-jb-HMe"/>
+                        <outlet property="testSwitch" destination="hch-PM-vhO" id="n5V-ce-mYw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RMJ-BQ-Hzu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1479" y="474"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KA2-KS-9J9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="edq-sK-u6B" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kJY-0d-1Us">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oT9-td-o2y" kind="relationship" relationship="rootViewController" id="qm9-9b-pNs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="34I-je-C0u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="627" y="474"/>
+        </scene>
+    </scenes>
+</document>

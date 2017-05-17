@@ -1,0 +1,8 @@
+coverage_service: cobertura_xml
+workspace: ControlsKit.xcworkspace
+xcodeproj: ControlsKit.xcodeproj
+scheme: ControlsKit
+source_directory: ControlsKit
+output_directory: coverage
+ignore:
+  - ControlsKitExample/*
