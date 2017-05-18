@@ -31,7 +31,6 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
 #define kPageControlDotsOriginalWidth 7.0f
 #define kPageControlDotsOriginalHeight 7.0f
 #define kPageControlDotsOriginalSpace 6.0f
-#define kUndefinedFloatValue INFINITY
 #define kDefaultCurrentPageTintColor [UIColor whiteColor]
 #define kDefaultPageTintColor [[UIColor whiteColor] colorWithAlphaComponent:0.5f]
 
@@ -105,72 +104,34 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
 
   [self updateSizeForDotSection];
   for (NSInteger i = 0; i < [self numberOfDotsToDisplay]; i++) {
-    CGSize dotSize = CGSizeMake(kUndefinedFloatValue, kUndefinedFloatValue);
-
-    // Update dot size.
-    if (self.numberOfPages == 1 && self.middleDotImageActive) {
-      dotSize = self.middleDotImageActive.size;
+    UIImage * imageToUse;
+    BOOL isActive = i == self.currentPage;
+    if (self.numberOfPages == 1) {
+      imageToUse = self.middleDotImageActive;
+    } else if (i == 0) {
+      imageToUse = isActive ? self.leftDotImageActive : self.leftDotImageInactive;
+    } else if (i == self.numberOfPages - 1) {
+      imageToUse = isActive ? self.rightDotImageActive : self.rightDotImageInactive;
     } else {
-      if (i == self.currentPage) {
-        if (i == 0 && self.leftDotImageActive) {
-          dotSize = self.leftDotImageActive.size;
-        } else if (i == self.numberOfPages - 1 && self.rightDotImageActive) {
-          dotSize = self.rightDotImageActive.size;
-        } else if (self.middleDotImageActive) {
-          dotSize = self.middleDotImageActive.size;
-        }
-      } else {
-        if (i == 0 && self.leftDotImageInactive) {
-          dotSize = self.leftDotImageInactive.size;
-        } else if (i == self.numberOfPages - 1 && self.rightDotImageInactive) {
-          dotSize = self.rightDotImageInactive.size;
-        } else if (self.middleDotImageInactive) {
-          dotSize = self.middleDotImageInactive.size;
-        }
-      }
+      imageToUse = isActive ? self.middleDotImageActive : self.middleDotImageInactive;
     }
 
-    // Update dot if needed (if custom size has been set).
-    if (dotSize.width != kUndefinedFloatValue) {
-      UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake([self xOriginForDotAtIndex:i], (self.frame.size.height - dotSize.height) / 2.0f, dotSize.width, dotSize.height)];
-      view.backgroundColor = [UIColor clearColor];
-
-      // Assign new image.
-      if (self.numberOfPages == 1) {
-        view.image = self.middleDotImageActive;
-      } else {
-        if (i == self.currentPage) {
-          if (i == 0) {
-            view.image = self.leftDotImageActive;
-          } else if (i == self.numberOfPages - 1) {
-            view.image = self.rightDotImageActive;
-          } else {
-            view.image = self.middleDotImageActive;
-          }
-        } else {
-          if (i == 0) {
-            view.image = self.leftDotImageInactive;
-          } else if (i == self.numberOfPages - 1) {
-            view.image = self.rightDotImageInactive;
-          } else {
-            view.image = self.middleDotImageInactive;
-          }
-        }
-      }
-      [self addSubview:view];
-      [self.dotsArray addObject:view];
-      [self setupGestureRecognizerForView:view];
+    UIView *view;
+    if (imageToUse != nil) {
+      view = [[UIImageView alloc] initWithImage:imageToUse];
     } else {
-      UIView *view = [[UIView alloc] initWithFrame:CGRectMake([self xOriginForDotAtIndex:i], (self.frame.size.height - self.dotsSize.height) / 2.0f, self.dotsSize.width, self.dotsSize.height)];
-      view.backgroundColor = i == self.currentPage ? self.currentPageIndicatorTintColor : self.pageIndicatorTintColor;
+      view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.dotsSize.width, self.dotsSize.height)];
+      view.backgroundColor = isActive ? self.currentPageIndicatorTintColor : self.pageIndicatorTintColor;
       view.layer.cornerRadius = MIN(view.bounds.size.width, view.bounds.size.height) / 2.0f;
       view.layer.masksToBounds = YES;
-
-      [self addSubview:view];
-      [self.dotsArray addObject:view];
-      [self setupGestureRecognizerForView:view];
     }
+
+    view.frame = CGRectMake([self xOriginForDotAtIndex:i], (self.frame.size.height - view.frame.size.height) / 2.0f, view.frame.size.width, view.frame.size.height);
+    [self addSubview:view];
+    [self.dotsArray addObject:view];
+    [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapDot:)]];
   }
+
   [self invalidateIntrinsicContentSize];
 }
 
@@ -186,12 +147,8 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
   return CGSizeMake([self totalWidthForNumberOfPages:pageCount], [self maxHeightForNumberOfPages:pageCount]);
 }
 
-- (void)didTapDot:(id)sender {
-  if (![sender isKindOfClass:[UITapGestureRecognizer class]]) {
-    return;
-  }
-
-  NSInteger dotIndex = [self.dotsArray indexOfObject:[(UITapGestureRecognizer *)sender view]];
+- (void)didTapDot:(UITapGestureRecognizer *)tapGestureRecognizer {
+  NSInteger dotIndex = [self.dotsArray indexOfObject:tapGestureRecognizer.view];
   if (dotIndex != self.currentPage) {
     self.currentPage = dotIndex;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -208,22 +165,17 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
   return self.numberOfPages;
 }
 
-- (void)setupGestureRecognizerForView:(UIView *)view {
-  UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapDot:)];
-  [view addGestureRecognizer:tapGestureRecognizer];
-}
-
 #pragma mark - Calculate Sizes
 
 - (CGSize)leftDotSize {
   if (self.currentPage == 0) {
-    if (self.leftDotImageActive) {
+    if (self.leftDotImageActive != nil) {
       return self.leftDotImageActive.size;
     } else {
       return self.dotsSize;
     }
   } else {
-    if (self.leftDotImageInactive) {
+    if (self.leftDotImageInactive != nil) {
       return self.leftDotImageInactive.size;
     } else {
       return self.dotsSize;
@@ -233,33 +185,29 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
 
 - (CGSize)rightDotSize {
   if (self.currentPage == self.numberOfPages - 1) {
-    if (self.rightDotImageActive) {
+    if (self.rightDotImageActive != nil) {
       return self.rightDotImageActive.size;
     } else {
       return self.dotsSize;
     }
+  } else if (self.rightDotImageInactive != nil) {
+    return self.rightDotImageInactive.size;
   } else {
-    if (self.rightDotImageInactive) {
-      return self.rightDotImageInactive.size;
-    } else {
-      return self.dotsSize;
-    }
+    return self.dotsSize;
   }
 }
 
 - (CGSize)middleDotSizeSelected:(BOOL)selected {
   if (selected) {
-    if (self.middleDotImageActive) {
+    if (self.middleDotImageActive != nil) {
       return self.middleDotImageActive.size;
     } else {
       return self.dotsSize;
     }
+  } else  if (self.middleDotImageInactive != nil) {
+    return self.middleDotImageInactive.size;
   } else {
-    if (self.middleDotImageInactive) {
-      return self.middleDotImageInactive.size;
-    } else {
-      return self.dotsSize;
-    }
+    return self.dotsSize;
   }
 }
 
@@ -278,44 +226,38 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
 }
 
 - (CGFloat)totalWidthForNumberOfPages:(NSInteger)numberOfPages {
-  if (numberOfPages == 0) {
+  if (numberOfPages == 0 || (numberOfPages == 1 && self.hidesForSinglePage)) {
     return 0.0f;
   } else if (numberOfPages == 1) {
-    return self.hidesForSinglePage ? 0.0f : [self middleDotSizeSelected:YES].width;
-  } else if (numberOfPages == 2) {
-    return [self leftDotSize].width + self.dotsSpace + [self rightDotSize].width;
-  } else {
-    return [self leftDotSize].width + self.dotsSpace + [self middleDotsSectionWidthForNumberOfPages:numberOfPages] + self.dotsSpace + [self rightDotSize].width;
+    return [self middleDotSizeSelected:YES].width;
   }
+  return [self leftDotSize].width + self.dotsSpace * 2.0 + [self middleDotsSectionWidthForNumberOfPages:numberOfPages] + [self rightDotSize].width;
 }
 
 - (CGFloat)maxHeightForNumberOfPages:(NSInteger)numberOfPages {
   CGFloat maxHeight = 0.0f;
 
-  if (numberOfPages == 0) {
+  if (numberOfPages == 0 || (numberOfPages == 1 && self.hidesForSinglePage)) {
     maxHeight = 0.0f;
   } else if (numberOfPages == 1) {
-    maxHeight = self.hidesForSinglePage ? 0.0f : [self middleDotSizeSelected:YES].height;
-  } else if (numberOfPages == 2) {
-    maxHeight = fmax([self rightDotSize].height, [self leftDotSize].height);
+    maxHeight = [self middleDotSizeSelected:YES].height;
   } else {
-    maxHeight = fmax(fmax([self rightDotSize].height, [self leftDotSize].height),fmax([self middleDotSizeSelected:YES].height, [self middleDotSizeSelected:NO].height));
+    maxHeight = fmax([self rightDotSize].height, [self leftDotSize].height);
+    if (numberOfPages > 2) {
+      maxHeight = fmax(maxHeight, fmax([self middleDotSizeSelected:YES].height, [self middleDotSizeSelected:NO].height));
+    }
   }
   return maxHeight;
 }
 
 #pragma mark - Calculate x origin for dots
 
-- (CGFloat)xOriginFirstDot {
-  return (self.frame.size.width - self.sizeForDotSection.width) / 2.0f;
-}
-
 - (CGFloat)xOriginForDotAtIndex:(NSInteger)dotIndex {
   if (dotIndex < 0 || dotIndex > self.numberOfPages - 1) {
-    return kUndefinedFloatValue;
+    return NAN;
   }
 
-  CGFloat sectionWidth = [self xOriginFirstDot];
+  CGFloat sectionWidth = (self.frame.size.width - self.sizeForDotSection.width) / 2.0f;
 
   if (self.currentPage != 0 && self.currentPage < dotIndex) {
     sectionWidth += [self middleDotSizeSelected:YES].width;
