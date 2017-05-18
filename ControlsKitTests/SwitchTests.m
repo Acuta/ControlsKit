@@ -31,7 +31,7 @@
 
 @interface CTKSwitch (PrivateTests)
 
-@property (nonatomic, retain, readwrite) UIImageView* backgroundImage;
+@property (nonatomic, retain, readwrite) UIImageView *backgroundImageView;
 
 - (void)switchValueChanged:(id)sender;
 
@@ -47,7 +47,7 @@
 
 - (void)setUp {
   [super setUp];
-  
+
   self.image = [UIImage imageNamed:@"Switch-Test-Image" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
 }
 
@@ -55,7 +55,7 @@
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Tests" bundle:[NSBundle bundleForClass:[self class]]];
   TestViewController *testViewController = [storyboard instantiateViewControllerWithIdentifier:@"TestsViewControllerID"];
   [testViewController loadView];
-  
+
   XCTAssertNotNil(testViewController.testSwitch);
   XCTAssertTrue([testViewController.testSwitch isKindOfClass:[CTKSwitch class]]);
 }
@@ -64,7 +64,7 @@
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.onTintColor = [UIColor redColor];
   theSwitch.on = YES;
-  
+
   XCTAssertEqualObjects(theSwitch.backgroundColor, [UIColor redColor]);
 }
 
@@ -72,7 +72,7 @@
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.offTintColor = [UIColor redColor];
   theSwitch.on = NO;
-  
+
   XCTAssertEqualObjects(theSwitch.backgroundColor, [UIColor redColor]);
 }
 
@@ -80,7 +80,7 @@
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.onTintColor = [UIColor redColor];
   theSwitch.on = NO;
-  
+
   XCTAssertNotEqualObjects(theSwitch.backgroundColor, [UIColor redColor]);
 }
 
@@ -88,7 +88,7 @@
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.offTintColor = [UIColor redColor];
   theSwitch.on = YES;
-  
+
   XCTAssertNotEqualObjects(theSwitch.backgroundColor, [UIColor redColor]);
 }
 
@@ -96,32 +96,32 @@
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.onImage = self.image;
   theSwitch.on = YES;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, self.image);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, self.image);
 }
 
 - (void)testOffBackgroundPicture {
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.offImage = self.image;
   theSwitch.on = NO;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, self.image);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, self.image);
 }
 
 - (void)testOnBackgroundPictureOffStatus {
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.onImage = self.image;
   theSwitch.on = NO;
-  
-  XCTAssertNotEqualObjects(theSwitch.backgroundImage.image, self.image);
+
+  XCTAssertNotEqualObjects(theSwitch.backgroundImageView.image, self.image);
 }
 
 - (void)testOffBackgroundPictureOnStatus {
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.offImage = self.image;
   theSwitch.on = YES;
-  
-  XCTAssertNotEqualObjects(theSwitch.backgroundImage.image, self.image);
+
+  XCTAssertNotEqualObjects(theSwitch.backgroundImageView.image, self.image);
 }
 
 - (void)testResetOnColor {
@@ -130,7 +130,7 @@
   theSwitch.onTintColor = color;
   theSwitch.on = YES;
   theSwitch.onTintColor = nil;
-  
+
   XCTAssertNotEqualObjects(theSwitch.backgroundColor, color);
 }
 
@@ -140,7 +140,7 @@
   theSwitch.offTintColor = color;
   theSwitch.on = NO;
   theSwitch.offTintColor = nil;
-  
+
   XCTAssertNotEqualObjects(theSwitch.backgroundColor, color);
 }
 
@@ -149,8 +149,8 @@
   theSwitch.onImage = self.image;
   theSwitch.on = YES;
   theSwitch.onImage = nil;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, nil);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, nil);
 }
 
 - (void)testResetOffBackgroundPicture {
@@ -158,8 +158,8 @@
   theSwitch.offImage = self.image;
   theSwitch.on = NO;
   theSwitch.offImage = nil;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, nil);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, nil);
 }
 
 - (void)testSwitchOnImage {
@@ -167,8 +167,8 @@
   theSwitch.on = YES;
   theSwitch.offImage = self.image;
   theSwitch.onImage = self.image;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, self.image);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, self.image);
 }
 
 - (void)testSwitchOnImageOffOnly {
@@ -176,7 +176,7 @@
   theSwitch.on = YES;
   theSwitch.offImage = self.image;
   theSwitch.onImage = nil;
-  
+
   XCTAssertNil(theSwitch.backgroundColor);
 }
 
@@ -185,8 +185,8 @@
   theSwitch.on = YES;
   theSwitch.onImage = self.image;
   theSwitch.onImage = self.image;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, self.image);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, self.image);
 }
 
 - (void)testSwitchRemoveImage {
@@ -194,8 +194,8 @@
   theSwitch.on = YES;
   theSwitch.onImage = self.image;
   theSwitch.onImage = nil;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, nil);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, nil);
 }
 
 - (void)testSwitchRemoveImageWithColors {
@@ -205,23 +205,23 @@
   theSwitch.offTintColor = [UIColor redColor];
   theSwitch.onImage = self.image;
   theSwitch.onImage = nil;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, nil);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, nil);
 }
 
 - (void)testSwitchSetOffImageWhenOn {
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.on = YES;
   theSwitch.offImage = self.image;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundImage.image, nil);
+
+  XCTAssertEqualObjects(theSwitch.backgroundImageView.image, nil);
 }
 
 - (void)testSwitchOffTintColorOffSwitch {
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.on = NO;
   theSwitch.offTintColor = [UIColor blueColor];
-  
+
   XCTAssertEqualObjects(theSwitch.backgroundColor, [UIColor blueColor]);
 }
 
@@ -230,61 +230,16 @@
   theSwitch.on = NO;
   theSwitch.offTintColor = [UIColor redColor];
   [theSwitch switchValueChanged:nil];
-  
+
   XCTAssertEqualObjects(theSwitch.backgroundColor, [UIColor redColor]);
 }
 
-- (void)testSwitchExtensiveProcess1 {
-  CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
-  theSwitch.on = YES;
-  theSwitch.onTintColor = [UIColor greenColor];
-  theSwitch.offTintColor = [UIColor redColor];
-  theSwitch.onImage = self.image;
-  theSwitch.offImage = self.image;
-  theSwitch.on = NO;
-  theSwitch.onTintColor = nil;
-  theSwitch.offTintColor = nil;
-  theSwitch.onImage = nil;
-  theSwitch.offImage = nil;
-  theSwitch.on = YES;
-  theSwitch.onTintColor = [UIColor blueColor];
-  
-  XCTAssertEqualObjects(theSwitch.backgroundColor, [UIColor blueColor]);
-}
-
-- (void)testSwitchExtensiveProcess2 {
-  CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
-  theSwitch.on = YES;
-  theSwitch.onTintColor = [UIColor greenColor];
-  theSwitch.offImage = self.image;
-  theSwitch.offImage = nil;
-  theSwitch.on = YES;
-  theSwitch.onImage = self.image;
-  theSwitch.on = NO;
-  theSwitch.onTintColor = nil;
-  theSwitch.offTintColor = nil;
-  theSwitch.offTintColor = [UIColor redColor];
-  theSwitch.onImage = nil;
-  theSwitch.offImage = nil;
-  theSwitch.on = YES;
-  theSwitch.onImage = self.image;
-  theSwitch.onTintColor = [UIColor blueColor];
-  theSwitch.onImage = nil;
-  
-  XCTAssertEqualObjects(theSwitch.backgroundColor, [UIColor blueColor]);
-}
-
-- (void)testSwitchExtensiveProcess3 {
-  CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
-  theSwitch.on = YES;
-  theSwitch.onTintColor = [UIColor greenColor];
-  theSwitch.onImage = self.image;
-  theSwitch.on = NO;
-  theSwitch.onTintColor = nil;
-  theSwitch.onImage = nil;
-  theSwitch.on = YES;
-  
-  XCTAssertNotEqualObjects(theSwitch.backgroundColor, nil); // Default ON color
+- (void)testSwitchBackgroundFrame {
+	CTKSwitch *theSwitch = [[CTKSwitch alloc] initWithFrame:CGRectMake(3.0f, 3.0f, 20.0f, 20.0f)];
+	XCTAssertTrue(CGRectEqualToRect(theSwitch.bounds, theSwitch.backgroundImageView.bounds));
+	theSwitch.frame = CGRectMake(5.0f, 5.0f, 50.0f, 50.0f);
+	[theSwitch layoutIfNeeded];
+	XCTAssertTrue(CGRectEqualToRect(theSwitch.bounds, theSwitch.backgroundImageView.bounds));
 }
 
 @end
