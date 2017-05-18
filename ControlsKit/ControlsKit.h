@@ -20,3 +20,5 @@ FOUNDATION_EXPORT const unsigned char ControlsKitVersionString[];
 #import "CTKPageControl.h"
 #import "CTKPlaceholderTextView.h"
 #import "CTKSwitch.h"
+#import "CTKPageViewController.h"
+#import "CTKPageViewControllerTitleView.h"

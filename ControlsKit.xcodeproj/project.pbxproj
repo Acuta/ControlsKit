@@ -30,6 +30,14 @@
 		F42804C11ECC88C200185741 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42804C01ECC88C200185741 /* PageControl.swift */; };
 		F42804C31ECC88CC00185741 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42804C21ECC88CC00185741 /* PlaceholderTextView.swift */; };
 		F42804C51ECC88D200185741 /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42804C41ECC88D200185741 /* Switch.swift */; };
+		F45E626B1ECDE1FA0083085A /* CTKPageViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F45E62651ECDE1FA0083085A /* CTKPageViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F45E626C1ECDE1FA0083085A /* CTKPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E62661ECDE1FA0083085A /* CTKPageViewController.m */; };
+		F45E626D1ECDE1FA0083085A /* CTKPageViewControllerTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = F45E62671ECDE1FA0083085A /* CTKPageViewControllerTitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F45E626E1ECDE1FA0083085A /* CTKPageViewControllerTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E62681ECDE1FA0083085A /* CTKPageViewControllerTitleView.m */; };
+		F45E626F1ECDE1FA0083085A /* CTKPageViewControllerTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45E62691ECDE1FA0083085A /* CTKPageViewControllerTitleView.xib */; };
+		F45E62701ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = F45E626A1ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h */; };
+		F45E62741ECDE2EB0083085A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E62731ECDE2EB0083085A /* PageViewController.swift */; };
+		F45E62761ECDE2F60083085A /* PageViewControllerTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E62751ECDE2F60083085A /* PageViewControllerTitleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +79,14 @@
 		F42804C01ECC88C200185741 /* PageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		F42804C21ECC88CC00185741 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		F42804C41ECC88D200185741 /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		F45E62651ECDE1FA0083085A /* CTKPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = CTKPageViewController.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F45E62661ECDE1FA0083085A /* CTKPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = CTKPageViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F45E62671ECDE1FA0083085A /* CTKPageViewControllerTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = CTKPageViewControllerTitleView.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F45E62681ECDE1FA0083085A /* CTKPageViewControllerTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = CTKPageViewControllerTitleView.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F45E62691ECDE1FA0083085A /* CTKPageViewControllerTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CTKPageViewControllerTitleView.xib; sourceTree = "<group>"; };
+		F45E626A1ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTKPageViewControllerTitleView+Private.h"; sourceTree = "<group>"; };
+		F45E62731ECDE2EB0083085A /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		F45E62751ECDE2F60083085A /* PageViewControllerTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewControllerTitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +143,14 @@
 				F42804661ECC622A00185741 /* CTKSwitch.h */,
 				F42804671ECC622A00185741 /* CTKSwitch.m */,
 				F42804C41ECC88D200185741 /* Switch.swift */,
+				F45E62651ECDE1FA0083085A /* CTKPageViewController.h */,
+				F45E62661ECDE1FA0083085A /* CTKPageViewController.m */,
+				F45E62731ECDE2EB0083085A /* PageViewController.swift */,
+				F45E62671ECDE1FA0083085A /* CTKPageViewControllerTitleView.h */,
+				F45E62681ECDE1FA0083085A /* CTKPageViewControllerTitleView.m */,
+				F45E62691ECDE1FA0083085A /* CTKPageViewControllerTitleView.xib */,
+				F45E626A1ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h */,
+				F45E62751ECDE2F60083085A /* PageViewControllerTitleView.swift */,
 				F42804591ECC5DD600185741 /* Info.plist */,
 			);
 			path = ControlsKit;
@@ -160,8 +184,11 @@
 			files = (
 				F428045A1ECC5DD600185741 /* ControlsKit.h in Headers */,
 				F428046A1ECC622A00185741 /* CTKPageControl.h in Headers */,
+				F45E626D1ECDE1FA0083085A /* CTKPageViewControllerTitleView.h in Headers */,
+				F45E626B1ECDE1FA0083085A /* CTKPageViewController.h in Headers */,
 				F428046E1ECC622A00185741 /* CTKSwitch.h in Headers */,
 				F428046C1ECC622A00185741 /* CTKPlaceholderTextView.h in Headers */,
+				F45E62701ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h in Headers */,
 				F42804681ECC622A00185741 /* CTKNibView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F45E626F1ECDE1FA0083085A /* CTKPageViewControllerTitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,12 +301,16 @@
 			files = (
 				F428046B1ECC622A00185741 /* CTKPageControl.m in Sources */,
 				F42804C51ECC88D200185741 /* Switch.swift in Sources */,
+				F45E62741ECDE2EB0083085A /* PageViewController.swift in Sources */,
 				F428046F1ECC622A00185741 /* CTKSwitch.m in Sources */,
 				F42804C11ECC88C200185741 /* PageControl.swift in Sources */,
+				F45E626E1ECDE1FA0083085A /* CTKPageViewControllerTitleView.m in Sources */,
 				F42804691ECC622A00185741 /* CTKNibView.m in Sources */,
+				F45E626C1ECDE1FA0083085A /* CTKPageViewController.m in Sources */,
 				F428046D1ECC622A00185741 /* CTKPlaceholderTextView.m in Sources */,
 				F42804BF1ECC88BC00185741 /* NibView.swift in Sources */,
 				F42804C31ECC88CC00185741 /* PlaceholderTextView.swift in Sources */,
+				F45E62761ECDE2F60083085A /* PageViewControllerTitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

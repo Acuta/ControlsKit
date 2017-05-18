@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
 		'PlaceholderTextView',
 		'PageControl',
 		'Switch',
+		'PageViewController',
 	]
 
 	['ObjC', 'Swift'].each do |lang|

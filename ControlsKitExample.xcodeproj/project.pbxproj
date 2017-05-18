@@ -15,6 +15,7 @@
 		F42804B51ECC66CC00185741 /* ControlsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F42804B31ECC66CC00185741 /* ControlsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F42804BA1ECC6FD700185741 /* SwitchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42804B91ECC6FD700185741 /* SwitchViewController.m */; };
 		F42804BD1ECC72DB00185741 /* PageControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F42804BC1ECC72DB00185741 /* PageControlViewController.m */; };
+		F45E62721ECDE2D00083085A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E62711ECDE2D00083085A /* PageViewController.swift */; };
 		F476541E1ECC998F0066A20C /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F476541C1ECC998F0066A20C /* HeaderView.swift */; };
 		F476541F1ECC998F0066A20C /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F476541D1ECC998F0066A20C /* HeaderView.xib */; };
 		F47654231ECC9C820066A20C /* NibViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47654221ECC9C820066A20C /* NibViewViewController.swift */; };
@@ -46,6 +47,8 @@
 		F42804B91ECC6FD700185741 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804BB1ECC72DB00185741 /* PageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = PageControlViewController.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804BC1ECC72DB00185741 /* PageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = PageControlViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F45E62711ECDE2D00083085A /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		F45E62771ECDE80A0083085A /* ControlsKitExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ControlsKitExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		F476541C1ECC998F0066A20C /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F476541D1ECC998F0066A20C /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		F47654221ECC9C820066A20C /* NibViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibViewViewController.swift; sourceTree = "<group>"; };
@@ -92,10 +95,12 @@
 				F476541C1ECC998F0066A20C /* HeaderView.swift */,
 				F476541D1ECC998F0066A20C /* HeaderView.xib */,
 				F47654221ECC9C820066A20C /* NibViewViewController.swift */,
+				F45E62711ECDE2D00083085A /* PageViewController.swift */,
 				F42804A51ECC66BD00185741 /* Main.storyboard */,
 				F42804A81ECC66BD00185741 /* Assets.xcassets */,
 				F42804AA1ECC66BD00185741 /* LaunchScreen.storyboard */,
 				F42804AD1ECC66BD00185741 /* Info.plist */,
+				F45E62771ECDE80A0083085A /* ControlsKitExample-Bridging-Header.h */,
 			);
 			path = ControlsKitExample;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 				F476541E1ECC998F0066A20C /* HeaderView.swift in Sources */,
 				F42804BA1ECC6FD700185741 /* SwitchViewController.m in Sources */,
 				F42804BD1ECC72DB00185741 /* PageControlViewController.m in Sources */,
+				F45E62721ECDE2D00083085A /* PageViewController.swift in Sources */,
 				F47654231ECC9C820066A20C /* NibViewViewController.swift in Sources */,
 				F42804A01ECC66BD00185741 /* AppDelegate.swift in Sources */,
 			);
@@ -319,6 +325,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Acuta.ControlsKitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ControlsKitExample/ControlsKitExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -334,6 +341,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Acuta.ControlsKitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ControlsKitExample/ControlsKitExample-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
