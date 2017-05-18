@@ -47,13 +47,13 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
+
   [self.applyBackgroundImageSwitchOn addTarget:self action:@selector(applyBackgroundImageSwitchOnDidChange:) forControlEvents:UIControlEventValueChanged];
   [self.applyBackgroundImageSwitchOff addTarget:self action:@selector(applyBackgroundImageSwitchOffDidChange:) forControlEvents:UIControlEventValueChanged];
-  
+
   [self.applyBackgroundColorSwitchOn addTarget:self action:@selector(applyBackgroundColorSwitchOnDidChange:) forControlEvents:UIControlEventValueChanged];
   [self.applyBackgroundColorSwitchOff addTarget:self action:@selector(applyBackgroundColorSwitchOffDidChange:) forControlEvents:UIControlEventValueChanged];
-  
+
   [self.applyForegroundColorSwitch addTarget:self action:@selector(applyForegroundColorSwitchDidChange:) forControlEvents:UIControlEventValueChanged];
 }
 

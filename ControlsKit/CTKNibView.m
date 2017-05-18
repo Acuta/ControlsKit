@@ -48,7 +48,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   if (self) {
-    
+
   }
   return self;
 }
@@ -63,7 +63,7 @@
 }
 
 - (NSString *)nibName {
-  NSString * baseName = NSStringFromClass([self class]);
+  NSString *baseName = NSStringFromClass([self class]);
   NSRange rangeOfDot = [baseName rangeOfString:@"."];
   return rangeOfDot.location == NSNotFound ? baseName : [baseName substringFromIndex:rangeOfDot.location + 1];
 }
@@ -78,7 +78,7 @@
 
 - (void)awakeFromNib {
   [super awakeFromNib];
-  
+
   self.shouldAwakeFromNib = NO;
   [self createFromNib];
 }
@@ -94,15 +94,15 @@
       [self awakeFromNib];
 #pragma clang diagnostic pop
     }
-    
+
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.contentView];
-    
-    NSLayoutConstraint * leadingConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
-    NSLayoutConstraint * topConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
-    NSLayoutConstraint * trailingConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
-    NSLayoutConstraint * bottomConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
-    
+
+    NSLayoutConstraint *leadingConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *trailingConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0.0];
+    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:self.contentView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
+
     [self addConstraints:@[leadingConstraint, topConstraint, trailingConstraint, bottomConstraint]];
   }
 }

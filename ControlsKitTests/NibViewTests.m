@@ -37,7 +37,7 @@
 
 - (void)testNibViewInit {
   NibViewTest * nibView = [[NibViewTest alloc] init];
-  
+
   XCTAssertNotNil(nibView.contentView);
   XCTAssertNotNil(nibView.label);
   XCTAssertTrue([nibView.label isKindOfClass:[UILabel class]]);
@@ -45,7 +45,7 @@
 
 - (void)testNibViewInitWithFrame {
   NibViewTest * nibView = [[NibViewTest alloc] initWithFrame:CGRectZero];
-  
+
   XCTAssertNotNil(nibView.contentView);
   XCTAssertNotNil(nibView.label);
   XCTAssertTrue([nibView.label isKindOfClass:[UILabel class]]);
@@ -55,7 +55,7 @@
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Tests" bundle:[NSBundle bundleForClass:[self class]]];
   TestViewController *testViewController = [storyboard instantiateViewControllerWithIdentifier:@"TestsViewControllerID"];
   [testViewController loadView];
-  
+
   XCTAssertNotNil(testViewController.testNibView);
   XCTAssertTrue([testViewController.testNibView isKindOfClass:[CTKNibView class]]);
   XCTAssertNotNil(testViewController.testNibView.contentView);
