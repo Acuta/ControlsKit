@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Background color when the switch is turned off.
  */
-@property (nonatomic, strong, nullable) IBInspectable UIColor* offTintColor;
+@property (nonatomic, strong, nullable) IBInspectable UIColor *offTintColor;
 
 @end
 

@@ -26,24 +26,14 @@
 
 #import "CTKSwitch.h"
 
-#define SWITCH_WIDTH 51.0f
-#define SWITCH_HEIGHT	31.0f
-#define kSwitchCurveRadius 16.0f
-
-#define RECT_FOR_ON	CGRectMake(0.0f, 0.0f, SWITCH_WIDTH, SWITCH_HEIGHT)
-
 #define kSwitchAnimationDuration 0.2f
 
 @interface CTKSwitch ()
 
-@property (nonatomic, retain, readwrite) UIImageView* backgroundImage;
+@property (nonatomic, retain, readwrite) UIImageView *backgroundImageView;
 
-@property (nonatomic, strong) UIColor *onTintColorSaved;
-@property (nonatomic, strong) UIColor *tintColorSaved;
-@property (nonatomic, strong) UIColor *backgroundColorSaved;
-
-@property (nonatomic, strong) UIImage* onImage;
-@property (nonatomic, strong) UIImage* offImage;
+@property (nonatomic, strong) UIImage *onImage;
+@property (nonatomic, strong) UIImage *offImage;
 
 @end
 
@@ -52,249 +42,120 @@
 @synthesize offImage = _offImage;
 @synthesize onTintColor = _onTintColor;
 
-- (instancetype)init {
-  self = [super init];
-  if (self) {
-    [self commonInit];
-  }
-  return self;
+- (instancetype)initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	if (self) {
+		[self ctk_commonInit];
+	}
+	return self;
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-  self = [super initWithCoder:coder];
-  if (self) {
-    [self commonInit];
-  }
-  return self;
+	self = [super initWithCoder:coder];
+	if (self) {
+		[self ctk_commonInit];
+	}
+	return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-  self = [super initWithFrame:frame];
-  if (self) {
-    [self commonInit];
-  }
-  return self;
-}
+- (void)ctk_commonInit {
+	_backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
+	_backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
 
-- (void)awakeFromNib {
-  [super awakeFromNib];
+	[self insertSubview:_backgroundImageView atIndex:0];
 
-  self.tintColorSaved = self.tintColor;
-  self.onTintColorSaved = self.onTintColor;
-  self.backgroundColorSaved = self.backgroundColor;
-  
-  // Trick: a Radius will be applied to the background in that case so it matches exactly the shape of the switch.
-  // Allows to apply a background color when the switch is turned off (impossible otherwise).
-  self.layer.cornerRadius = kSwitchCurveRadius;
-  self.layer.masksToBounds = YES;
-}
+	// Trick: a Radius will be applied to the background in that case so it matches exactly the shape of the switch.
+	// Allows to apply a background color when the switch is turned off (impossible otherwise).
+	self.layer.cornerRadius = MIN(self.bounds.size.width, self.bounds.size.height) / 2.0f;
+	self.layer.masksToBounds = YES;
 
-- (void)commonInit {
-  [self setupUserInterface];
-  [self addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+	[self addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+
+	[self updateState];
 }
 
 - (void)dealloc {
-  [self removeTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+	[self removeTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)setOn:(BOOL)on {
-  [super setOn:on];
-  
-  [self updateDesign];
+	[super setOn:on];
+
+	[self updateState];
 }
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated {
-  [super setOn:on animated:animated];
-  
-  [self updateDesign];
-}
+	[super setOn:on animated:animated];
 
-- (void)setupUserInterface {
-  UIImageView *background = [[UIImageView alloc] initWithFrame:RECT_FOR_ON];
-  background.contentMode = UIViewContentModeScaleAspectFit;
-  self.backgroundImage = background;
-  
-  [self addSubview:self.backgroundImage];
-  [self sendSubviewToBack:self.backgroundImage];
-  
-  [self updateDesign];
-}
-
-- (void)updateDesign {
-  if (self.on) {
-    if (self.onImage != nil) {
-      self.onTintColor = [UIColor clearColor];
-      [UIView transitionWithView:self.backgroundImage
-                        duration:kSwitchAnimationDuration
-                         options:UIViewAnimationOptionTransitionCrossDissolve
-                      animations:^{
-                        self.backgroundImage.image = self.onImage;
-                      } completion:nil];
-    } else {
-      self.backgroundImage.image = nil;
-      [self updateColorsOn];
-    }
-  } else {
-    if (self.offImage != nil) {
-      [UIView transitionWithView:self.backgroundImage
-                        duration:kSwitchAnimationDuration
-                         options:UIViewAnimationOptionTransitionCrossDissolve
-                      animations:^{
-                        self.backgroundImage.image = self.offImage;
-                      } completion:nil];
-    } else {
-      self.backgroundImage.image = nil;
-      [self updateColorsOff];
-    }
-  }
+	[self updateStateAnimated:animated];
 }
 
 - (void)switchValueChanged:(id)sender {
-  [self updateDesign];
+	[self updateState];
 }
 
-#pragma mark - Update colors methods
+- (void)layoutSubviews {
+	[super layoutSubviews];
 
-- (void)updateColorsOn {
-  self.backgroundColor = self.onTintColor;
-}
-
-- (void)updateColorsOff {
-  self.backgroundColor = self.offTintColor;
-  self.tintColor = self.offTintColor;
-}
-
-#pragma mark - Helpers
-
-- (void)restoreOnTintColor {
-  self.onTintColor = self.onTintColorSaved;
-}
-
-- (void)restoreTintColor {
-  self.tintColor = self.tintColorSaved;
-}
-
-- (void)restoreBackgroundColor {
-  self.backgroundColor = self.backgroundColorSaved;
-}
-
-- (void)saveAndClearOnTintColor {
-  self.onTintColorSaved = self.onTintColor;
-  self.onTintColor = [UIColor clearColor];
-}
-
-- (void)saveAndClearTintColor {
-  self.tintColorSaved = self.tintColor;
-  self.tintColor = [UIColor clearColor];
-}
-
-- (void)saveAndClearBackgroundColor {
-  self.backgroundColorSaved = self.backgroundColor;
-  self.backgroundColor = [UIColor clearColor];
+	self.backgroundImageView.frame = self.bounds;
 }
 
 #pragma mark - Setters
 
 - (void)setOnImage:(UIImage *)onImage {
-  _onImage = onImage;
-  
-  if (self.isOn) {
-    self.backgroundImage.image = onImage;
-    
-    if (onImage == nil) {
-      [self restoreOnTintColor];
-      
-      // Restore the border color if there is no offImage (seen only in that case), make it clear otherwise.
-      if (self.offImage == nil) {
-        [self restoreTintColor];
-      } else {
-        self.tintColor = [UIColor clearColor];
-      }
-      
-      [self updateColorsOn];
-    } else {
-      // Save and make border and onTintColor clear if we are setting a new onImage.
-      [self saveAndClearOnTintColor];
-      [self saveAndClearTintColor];
-    }
-  } else {
-    // Restore the border color if we are deleting the onImage, save and make it clear if we are setting a onImage. Those colors will be seen when the switch will be switched off.
-    if (onImage == nil) {
-      [self restoreOnTintColor];
-    } else {
-      [self saveAndClearOnTintColor];
-    }
-  }
+	_onImage = onImage;
+
+	[self updateState];
 }
 
 - (void)setOffImage:(UIImage *)offImage {
-  _offImage = offImage;
-  
-  if (!self.isOn) {
-    self.backgroundImage.image = offImage;
-    
-    // If deleting the offImage, make tintColor and backgroundColor appear. Save and clear them otherwise.
-    if (offImage == nil) {
-      [self restoreTintColor];
-      [self restoreBackgroundColor];
-      
-      [self updateColorsOff];
-    } else {
-      [self saveAndClearTintColor];
-      [self saveAndClearBackgroundColor];
-    }
-  } else {
-    [self saveAndClearTintColor];
-  }
+	_offImage = offImage;
+
+	[self updateState];
 }
 
 - (void)setOnTintColor:(UIColor *)onTintColor {
-  // Save this onTintColor right away. Might be use if user requests getOnTintColor or backgroundColor.
-  _onTintColor = onTintColor;
-  
-  // Don't udate onTintColor but save it instead if onImage is already displayed (would be overlapped by onTintColor otherwise). However, it is not necessary to prevent this update if onTintColor is clear (won't impact the way the onImage is displayed, it is even mandatory to accept updates with a clear color for a few cases).
-  if (self.onImage != nil && self.isOn && onTintColor != [UIColor clearColor]) {
-    self.onTintColorSaved = onTintColor;
-    return;
-  }
-  
-  // Call super constructor passing new or default onTintColor depending on its value (nil removes previous color and will set default color instead).
-  if (onTintColor != nil) {
-    [super setOnTintColor:onTintColor];
-  } else {
-    [super setOnTintColor:nil];
-  }
-  
-  if (self.isOn) {
-    // Restore border color if onImage is being deleted.
-    if (self.onImage == nil && self.tintColorSaved != nil) {
-      self.tintColor = self.tintColorSaved;
-    }
-    
-    [self updateColorsOn];
-  }
+	_onTintColor = onTintColor;
+
+	[self updateState];
 }
 
 - (void)setOffTintColor:(UIColor *)offTintColor {
-  _offTintColor = offTintColor;
-  
-  // Direct display, if offImage is being set we won't need any border color anymore.
-  if (!self.isOn && self.offImage == nil) {
-    [self updateColorsOff];
-  } else {
-    self.tintColor = [UIColor clearColor];
-  }
+	_offTintColor = offTintColor;
+
+	[self updateState];
 }
 
 #pragma mark - Overriden getters
 
 - (UIColor *)backgroundColor {
-  if (self.on) {
-    return self.onTintColor;
-  } else {
-    return [super backgroundColor];
-  }
+	if (self.isOn) {
+		return self.onTintColor;
+	}
+	return [super backgroundColor];
+}
+
+#pragma mark - Helper methods
+
+- (void)updateState {
+	[self updateStateAnimated:NO];
+}
+
+- (void)updateStateAnimated:(BOOL)animated {
+	if (self.isOn) {
+		[super setOnTintColor:self.onImage != nil ? [UIColor clearColor] : self.onTintColor];
+	} else {
+		self.backgroundColor = self.offImage != nil ? [UIColor clearColor] : self.offTintColor;
+		self.tintColor = self.backgroundColor;
+	}
+
+	[UIView transitionWithView:self.backgroundImageView
+										duration:animated ? kSwitchAnimationDuration : 0.0f
+										 options:UIViewAnimationOptionTransitionCrossDissolve
+									animations:^{
+										self.backgroundImageView.image = self.isOn ? self.onImage : self.offImage;
+									}
+									completion:nil];
 }
 
 @end
