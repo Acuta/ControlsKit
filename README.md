@@ -27,7 +27,13 @@ Allows to use Interface Builder to create the layout of a view inside a xib file
 
 ### PageControl
 
-A custom subclass of `UIView` which acts as a drop-in replacement for `UIPageControl`, but that allow for deep customizations.
+![PageControl](README_Files/PageControl-Example.gif)
+
+Re-implemented from scratch and **fully customizable**, our Page Control allows to do in just a few lines what would take hundreds if subclassing the native one (not to mention the dirty overrides usually implied).
+
+- Specify your **custom active/inactive dot images** (with possibly most-left and most-right ones different)
+- Specify **spacing** between dots (animatable)
+- Enjoy all other possibilities the native Page Control provides via the **very same API**
 
 ### PlaceholderTextView
 
@@ -35,7 +41,17 @@ A subclass of `UITextView` which provides a placeholder text.
 
 ### Switch
 
-A subclass of `UISwitch` allowing to add custom images and colors to the default iOS Switch.
+![Switch](README_Files/Switch-Example.gif)
+
+The native **UISwitch** often forces developers to implement their own custom subclass because of its **limitations**. Our Switch subclass should address the most common ones:
+
+- Inability to set a **background off color** to replace the native grey one
+
+Addition of new `offTintColor` property (counterpart of native `onTintColor` property)
+
+- Unreliable logic when **setting or removing** `onImage` and `offImage` with current color
+
+Refined logic so `onImage` takes precedence over `onTintColor` if set: the image is seen, the on tint color is not seen. If `onImage` is nil, the `onTintColor` is shown. The same logic applies to `offTintColor` and all combinations are totally customizable, reliably, at all times.
 
 ## Installation
 
