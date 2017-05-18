@@ -38,19 +38,19 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f,
 
 - (id)initWithFrame:(CGRect)frame {
 	if (self = [super initWithFrame:frame]) {
-		[self commonInit];
+		[self ctk_commonInit];
 	}
 	return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	if (self = [super initWithCoder:aDecoder]) {
-		[self commonInit];
+		[self ctk_commonInit];
 	}
 	return self;
 }
 
-- (void)commonInit {
+- (void)ctk_commonInit {
 	_placeholderInsets = kCTKPlaceholderTextViewDefaultPlaceholderInset;
 
 	_placeholderLabel = [[UILabel alloc] init];
@@ -60,15 +60,15 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f,
 	[self updatePlaceholderFrame];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
-																					 selector:@selector(handleTextViewDidBeginEditing:)
+																					 selector:@selector(updatePlaceholderVisibilityFromNotification:)
 																							 name:UITextViewTextDidBeginEditingNotification
 																						 object:self];
 	[[NSNotificationCenter defaultCenter] addObserver:self
-																					 selector:@selector(handleTextViewDidChange:)
+																					 selector:@selector(updatePlaceholderVisibilityFromNotification:)
 																							 name:UITextViewTextDidChangeNotification
 																						 object:self];
 	[[NSNotificationCenter defaultCenter] addObserver:self
-																					 selector:@selector(handleTextViewDidEndEditing:)
+																					 selector:@selector(updatePlaceholderVisibilityFromNotification:)
 																							 name:UITextViewTextDidEndEditingNotification
 																						 object:self];
 }
@@ -80,7 +80,7 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f,
 - (void)setText:(NSString *)text {
 	[super setText:text];
 
-	[self updatePlaceholderVisibility];
+	[self updatePlaceholderVisibilityFromNotification:nil];
 }
 
 - (void)layoutSubviews {
@@ -125,19 +125,7 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f,
 	[self updatePlaceholderFrame];
 }
 
-- (void)handleTextViewDidBeginEditing:(NSNotification *)notification {
-	[self updatePlaceholderVisibility];
-}
-
-- (void)handleTextViewDidChange:(NSNotification *)notification {
-	[self updatePlaceholderVisibility];
-}
-
-- (void)handleTextViewDidEndEditing:(NSNotification *)notification {
-	[self updatePlaceholderVisibility];
-}
-
-- (void)updatePlaceholderVisibility {
+- (void)updatePlaceholderVisibilityFromNotification:(NSNotification *)notification {
 	self.placeholderLabel.hidden = self.text.length > 0;
 	[self sendSubviewToBack:self.placeholderLabel];
 }
