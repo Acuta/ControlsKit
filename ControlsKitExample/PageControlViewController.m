@@ -40,10 +40,9 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet CTKPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UISwitch *setCustomDotsSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *setCustomImagesSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *setCustomColorsSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *updateDotsImmediatelySwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *hideDotIfOnlyOneSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *applyTintToImagesSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *dotsSpaceSlider;
 @property (weak, nonatomic) IBOutlet UILabel *dotsSpaceCurrentValueLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *numberOfDotsStepper;
@@ -55,11 +54,6 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
-  [self.setCustomDotsSwitch addTarget:self action:@selector(setCustomDotsSwitchDidChange:) forControlEvents:UIControlEventValueChanged];
-  [self.setCustomColorsSwitch addTarget:self action:@selector(setCustomColorsSwitchDidChange:) forControlEvents:UIControlEventValueChanged];
-  [self.updateDotsImmediatelySwitch addTarget:self action:@selector(updateDotsImmediatelySwitchDidChange:) forControlEvents:UIControlEventValueChanged];
-  [self.hideDotIfOnlyOneSwitch addTarget:self action:@selector(hideDotIfOnlyOneSwitchDidChange:) forControlEvents:UIControlEventValueChanged];
   
   [self.dotsSpaceSlider addTarget:self action:@selector(dotsSpaceSliderDidChange:) forControlEvents:UIControlEventValueChanged];
   self.dotsSpaceSlider.minimumValue = kPageControlDotsMinSpace;
@@ -80,8 +74,8 @@
   [self setupColorViewsToDisplay];
 }
 
-- (void)setCustomDotsSwitchDidChange:(id)sender {
-  if (self.setCustomDotsSwitch.isOn) {
+- (IBAction)setCustomDotsSwitchDidChange:(UISwitch *)theSwitch {
+  if (theSwitch.isOn) {
     self.pageControl.leftDotImageActive = [UIImage imageNamed:@"Carousel-Left-Active"];
     self.pageControl.leftDotImageInactive = [UIImage imageNamed:@"Carousel-Left-Inactive"];
     
@@ -100,11 +94,11 @@
     self.pageControl.rightDotImageActive = nil;
     self.pageControl.rightDotImageInactive = nil;
   }
-  self.setCustomColorsSwitch.enabled = !self.setCustomDotsSwitch.isOn;
+	self.setCustomColorsSwitch.enabled = self.applyTintToImagesSwitch.isOn || !theSwitch.isOn;
 }
 
-- (void)setCustomColorsSwitchDidChange:(id)sender {
-  if (self.setCustomColorsSwitch.isOn) {
+- (IBAction)setCustomColorsSwitchDidChange:(UISwitch *)theSwitch {
+  if (theSwitch.isOn) {
     self.pageControl.pageIndicatorTintColor = [[UIColor whiteColor] colorWithAlphaComponent:0.25f];
     self.pageControl.currentPageIndicatorTintColor = self.view.tintColor;
   } else {
@@ -113,8 +107,8 @@
   }
 }
 
-- (void)updateDotsImmediatelySwitchDidChange:(id)sender {
-  if (self.updateDotsImmediatelySwitch.isOn) {
+- (IBAction)updateDotsImmediatelySwitchDidChange:(UISwitch *)theSwitch {
+  if (theSwitch.isOn) {
     self.pageControl.defersCurrentPageDisplay = NO;
     [self.pageControl updateCurrentPageDisplay];
   } else {
@@ -122,16 +116,21 @@
   }
 }
 
-- (void)hideDotIfOnlyOneSwitchDidChange:(id)sender {
-  self.pageControl.hidesForSinglePage = self.hideDotIfOnlyOneSwitch.isOn;
+- (IBAction)applyTintToImagesSwitchDidChange:(UISwitch *)theSwitch {
+	self.pageControl.applyPageIndicatorTintColor = theSwitch.isOn;
+	self.setCustomColorsSwitch.enabled = theSwitch.isOn || !self.setCustomImagesSwitch.isOn;
 }
 
-- (void)dotsSpaceSliderDidChange:(id)sender {
+- (IBAction)hideDotIfOnlyOneSwitchDidChange:(UISwitch *)theSwitch {
+  self.pageControl.hidesForSinglePage = theSwitch.isOn;
+}
+
+- (IBAction)dotsSpaceSliderDidChange:(UISlider *)slider {
   self.pageControl.dotsSpace = self.dotsSpaceSlider.value;
   self.dotsSpaceCurrentValueLabel.text = [NSString stringWithFormat:@"%.2f", self.dotsSpaceSlider.value];
 }
 
-- (void)numberOfDotsStepperDidChange:(id)sender {
+- (IBAction)numberOfDotsStepperDidChange:(UISlider *)slider {
   self.pageControl.numberOfPages = self.numberOfDotsStepper.value;
   self.numberOfDotsCurrentValueLabel.text = [NSString stringWithFormat:@"%.0f", self.numberOfDotsStepper.value];
 }

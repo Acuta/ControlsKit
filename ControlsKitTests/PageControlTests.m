@@ -53,439 +53,492 @@
 @implementation PageControlTests
 
 - (void)setUp {
-  [super setUp];
+	[super setUp];
 
-  self.inactiveLeftImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-  self.inactiveMiddleImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-  self.inactiveRightImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+	self.inactiveLeftImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+	self.inactiveMiddleImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+	self.inactiveRightImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
 
-  self.activeLeftImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-  self.activeMiddleImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
-  self.activeRightImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+	self.activeLeftImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+	self.activeMiddleImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
+	self.activeRightImage = [UIImage imageNamed:@"Carousel-Middle-Active" inBundle:[NSBundle bundleForClass:[self class]] compatibleWithTraitCollection:nil];
 }
 
 #pragma mark - Test Load View
 
 - (void)testLoadPageControlInView {
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Tests" bundle:[NSBundle bundleForClass:[self class]]];
-  TestViewController *testViewController = [storyboard instantiateViewControllerWithIdentifier:@"TestsViewControllerID"];
-  [testViewController loadView];
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Tests" bundle:[NSBundle bundleForClass:[self class]]];
+	TestViewController *testViewController = [storyboard instantiateViewControllerWithIdentifier:@"TestsViewControllerID"];
+	[testViewController loadView];
 
-  XCTAssertNotNil(testViewController.testPageControl);
-  XCTAssertTrue([testViewController.testPageControl isKindOfClass:[CTKPageControl class]]);
+	XCTAssertNotNil(testViewController.testPageControl);
+	XCTAssertTrue([testViewController.testPageControl isKindOfClass:[CTKPageControl class]]);
 }
 
 #pragma mark - Default Dots
 
 - (void)testPageControlNumberOfPages {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
 
-  XCTAssertEqual(pageControl.dotsArray.count, 5);
+	XCTAssertEqual(pageControl.dotsArray.count, 5);
 }
 
 - (void)testPageControlChangeNumberOfPages {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.numberOfPages = 10;
-  pageControl.numberOfPages = 3;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.numberOfPages = 10;
+	pageControl.numberOfPages = 3;
 
-  XCTAssertEqual(pageControl.dotsArray.count, 3);
+	XCTAssertEqual(pageControl.dotsArray.count, 3);
 }
 
 - (void)testPageControlNegativeNumberOfPages {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = -1;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = -1;
 
-  XCTAssertEqual(pageControl.dotsArray.count, 0);
+	XCTAssertEqual(pageControl.dotsArray.count, 0);
 }
 
 - (void)testPageControlNumberOfPagesInferiorToCurrentPage {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 4;
-  pageControl.numberOfPages = 2;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 4;
+	pageControl.numberOfPages = 2;
 
-  XCTAssertEqual(pageControl.currentPage, 1);
+	XCTAssertEqual(pageControl.currentPage, 1);
 }
 
 - (void)testPageControlDefaultCurrentPage {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
 
-  XCTAssertEqual(pageControl.currentPage, 0);
+	XCTAssertEqual(pageControl.currentPage, 0);
 }
 
 - (void)testPageControlChangeCurrentPageColor {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 3;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 3;
 
-  XCTAssertEqualObjects([(UIView *)pageControl.dotsArray[3] backgroundColor], pageControl.currentPageIndicatorTintColor);
+	XCTAssertEqualObjects([(UIView *)pageControl.dotsArray[3] backgroundColor], pageControl.currentPageIndicatorTintColor);
 }
 
 - (void)testPageControlNegativeCurrentPage {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = -1;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = -1;
 
-  XCTAssertEqual(pageControl.currentPage, 0);
+	XCTAssertEqual(pageControl.currentPage, 0);
 }
 
 - (void)testPageControlCurrentPageSuperiorToNumberOfPages {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 10;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 10;
 
-  XCTAssertEqual(pageControl.currentPage, pageControl.numberOfPages - 1);
+	XCTAssertEqual(pageControl.currentPage, pageControl.numberOfPages - 1);
 }
 
 - (void)testPageControlChangeOtherPagesColor {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  for (UIView *dot in pageControl.dotsArray) {
-    if (dot != pageControl.dotsArray[0]) {
-      XCTAssertEqualObjects(dot.backgroundColor, pageControl.pageIndicatorTintColor);
-    }
-  }
+	for (UIView *dot in pageControl.dotsArray) {
+		if (dot != pageControl.dotsArray[0]) {
+			XCTAssertEqualObjects(dot.backgroundColor, pageControl.pageIndicatorTintColor);
+		}
+	}
 }
 
 - (void)testPageControlChangeFrameDefaultDots {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 100.0f)];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  CGFloat previousOriginX = [pageControl.dotsArray[0] frame].origin.x;
-  pageControl.frame = CGRectMake(0.0f, 0.0f, 400.0f, 100.0f);
-  [pageControl layoutIfNeeded];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 100.0f)];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	CGFloat previousOriginX = [pageControl.dotsArray[0] frame].origin.x;
+	pageControl.frame = CGRectMake(0.0f, 0.0f, 400.0f, 100.0f);
+	[pageControl layoutIfNeeded];
 
-  XCTAssert([pageControl.dotsArray[0] frame].origin.x > previousOriginX);
+	XCTAssert([pageControl.dotsArray[0] frame].origin.x > previousOriginX);
 }
 
 - (void)testXOriginForDotAtIndexPathValue {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 100.0f)];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 100.0f)];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  XCTAssertEqual([pageControl xOriginForDotAtIndex:2], pageControl.frame.size.width / 2.0f - [pageControl.dotsArray[2] frame].size.width / 2.0f);
+	XCTAssertEqual([pageControl xOriginForDotAtIndex:2], pageControl.frame.size.width / 2.0f - [pageControl.dotsArray[2] frame].size.width / 2.0f);
 }
 
 - (void)testXOriginForDotAtIndexPathNegativeValue {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 100.0f)];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 100.0f)];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  XCTAssertTrue(isnan([pageControl xOriginForDotAtIndex:-1]));
+	XCTAssertTrue(isnan([pageControl xOriginForDotAtIndex:-1]));
 }
 
 #pragma mark - View Changes And Sizes
 
 - (void)testPageControlSizeToFit {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  [pageControl sizeToFit];
-  [pageControl layoutIfNeeded];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	[pageControl sizeToFit];
+	[pageControl layoutIfNeeded];
 
-  for (UIView *dot in pageControl.dotsArray) {
-    XCTAssertEqual(dot.frame.origin.y, 0.0f);
-  }
+	for (UIView *dot in pageControl.dotsArray) {
+		XCTAssertEqual(dot.frame.origin.y, 0.0f);
+	}
 }
 
 - (void)testPageControlIntrinsicContentSize {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  pageControl.frame = CGRectMake(0.0f, 0.0f, pageControl.intrinsicContentSize.width, pageControl.intrinsicContentSize.height);
-  [pageControl layoutIfNeeded];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	pageControl.frame = CGRectMake(0.0f, 0.0f, pageControl.intrinsicContentSize.width, pageControl.intrinsicContentSize.height);
+	[pageControl layoutIfNeeded];
 
-  for (UIView *dot in pageControl.dotsArray) {
-    XCTAssertEqual(dot.frame.origin.y, 0.0f);
-  }
+	for (UIView *dot in pageControl.dotsArray) {
+		XCTAssertEqual(dot.frame.origin.y, 0.0f);
+	}
 
-  XCTAssertEqual(pageControl.frame.size.width, (pageControl.dotsSize.width + pageControl.dotsSpace) * pageControl.numberOfPages - pageControl.dotsSpace);
+	XCTAssertEqual(pageControl.frame.size.width, (pageControl.dotsSize.width + pageControl.dotsSpace) * pageControl.numberOfPages - pageControl.dotsSpace);
 }
 
 - (void)testPageControlCustomDotsSize {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  pageControl.dotsSpace = 5.0f;
-  pageControl.dotsSize = CGSizeMake(30.0f, 20.0f);
-  pageControl.frame = CGRectMake(0.0f, 0.0f, pageControl.intrinsicContentSize.width, pageControl.intrinsicContentSize.height);
-  [pageControl layoutIfNeeded];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	pageControl.dotsSpace = 5.0f;
+	pageControl.dotsSize = CGSizeMake(30.0f, 20.0f);
+	pageControl.frame = CGRectMake(0.0f, 0.0f, pageControl.intrinsicContentSize.width, pageControl.intrinsicContentSize.height);
+	[pageControl layoutIfNeeded];
 
-  for (UIView *dot in pageControl.dotsArray) {
-    XCTAssertEqual(dot.frame.origin.y, 0.0f);
-  }
+	for (UIView *dot in pageControl.dotsArray) {
+		XCTAssertEqual(dot.frame.origin.y, 0.0f);
+	}
 
-  XCTAssertEqual(pageControl.frame.size.width, (pageControl.dotsSize.width + pageControl.dotsSpace) * pageControl.numberOfPages - pageControl.dotsSpace);
+	XCTAssertEqual(pageControl.frame.size.width, (pageControl.dotsSize.width + pageControl.dotsSpace) * pageControl.numberOfPages - pageControl.dotsSpace);
 }
 
 - (void)testPageControlLayoutSubviews {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  CGFloat previousOriginX = [pageControl.dotsArray[0] frame].origin.x;
-  pageControl.frame = CGRectMake(0.0f, 0.0f, 400.0f, 100.0f);
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	CGFloat previousOriginX = [pageControl.dotsArray[0] frame].origin.x;
+	pageControl.frame = CGRectMake(0.0f, 0.0f, 400.0f, 100.0f);
 
-  [pageControl setNeedsLayout];
-  [pageControl layoutIfNeeded];
+	[pageControl setNeedsLayout];
+	[pageControl layoutIfNeeded];
 
-  XCTAssert([pageControl.dotsArray[0] frame].origin.x > previousOriginX);
+	XCTAssert([pageControl.dotsArray[0] frame].origin.x > previousOriginX);
 }
 
 - (void)testPageControlSizeForNumberOfPagesNoPages {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 0;
-  [pageControl sizeToFit];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 0;
+	[pageControl sizeToFit];
 
-  XCTAssertEqual(pageControl.frame.size.width, 0.0f);
-  XCTAssertEqual(pageControl.frame.size.height, 0.0f);
+	XCTAssertEqual(pageControl.frame.size.width, 0.0f);
+	XCTAssertEqual(pageControl.frame.size.height, 0.0f);
 }
 
 - (void)testPageControlSizeForNumberOfPagesOnePage {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 1;
-  [pageControl sizeToFit];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 1;
+	[pageControl sizeToFit];
 
-  XCTAssertEqual(pageControl.frame.size.width, [pageControl.dotsArray[0] frame].size.width);
-  XCTAssertEqual(pageControl.frame.size.height, [pageControl.dotsArray[0] frame].size.height);
+	XCTAssertEqual(pageControl.frame.size.width, [pageControl.dotsArray[0] frame].size.width);
+	XCTAssertEqual(pageControl.frame.size.height, [pageControl.dotsArray[0] frame].size.height);
 }
 
 - (void)testPageControlSizeForNumberOfPagesTwoPages {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 2;
-  [pageControl sizeToFit];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 2;
+	[pageControl sizeToFit];
 
-  XCTAssertEqual(pageControl.frame.size.width, [pageControl.dotsArray[0] frame].size.width * 2.0f + pageControl.dotsSpace);
-  XCTAssertEqual(pageControl.frame.size.height, [pageControl.dotsArray[0] frame].size.height);
+	XCTAssertEqual(pageControl.frame.size.width, [pageControl.dotsArray[0] frame].size.width * 2.0f + pageControl.dotsSpace);
+	XCTAssertEqual(pageControl.frame.size.height, [pageControl.dotsArray[0] frame].size.height);
 }
 
 - (void)testPageControlSizeForNumberOfPagesTenPages {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 10;
-  [pageControl sizeToFit];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 10;
+	[pageControl sizeToFit];
 
-  XCTAssertEqual(pageControl.frame.size.width, [pageControl sizeForNumberOfPages:10].width);
-  XCTAssertEqual(pageControl.frame.size.height, [pageControl sizeForNumberOfPages:10].height);
+	XCTAssertEqual(pageControl.frame.size.width, [pageControl sizeForNumberOfPages:10].width);
+	XCTAssertEqual(pageControl.frame.size.height, [pageControl sizeForNumberOfPages:10].height);
 }
 
 - (void)testDistanceBetweenDotsChange {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 2;
-  pageControl.dotsSpace = 10.0f;
-  [pageControl sizeToFit];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 2;
+	pageControl.dotsSpace = 10.0f;
+	[pageControl sizeToFit];
 
-  XCTAssertEqual(pageControl.frame.size.width, [pageControl.dotsArray[0] frame].size.width + 10.0f + [pageControl.dotsArray[1] frame].size.width);
+	XCTAssertEqual(pageControl.frame.size.width, [pageControl.dotsArray[0] frame].size.width + 10.0f + [pageControl.dotsArray[1] frame].size.width);
 }
 
 #pragma mark - Custom Dot Images
 
 - (void)testPageControlCustomImagesInactiveAllTheSame {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  pageControl.leftDotImageInactive = self.activeMiddleImage;
-  pageControl.middleDotImageInactive = self.activeMiddleImage;
-  pageControl.rightDotImageInactive = self.activeMiddleImage;
+	pageControl.leftDotImageInactive = self.activeMiddleImage;
+	pageControl.middleDotImageInactive = self.activeMiddleImage;
+	pageControl.rightDotImageInactive = self.activeMiddleImage;
 
-  for (UIImageView *dot in pageControl.dotsArray) {
-    if ([dot isKindOfClass:[UIImageView class]]) {
-      XCTAssertEqualObjects(dot.image, self.activeMiddleImage);
-    }
-  }
+	for (UIImageView *dot in pageControl.dotsArray) {
+		if ([dot isKindOfClass:[UIImageView class]]) {
+			XCTAssertEqualObjects(UIImagePNGRepresentation(dot.image), UIImagePNGRepresentation(self.activeMiddleImage));
+		}
+	}
 }
 
 - (void)testPageControlCustomImagesActiveAllTheSameCurrent {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  pageControl.leftDotImageActive = self.inactiveMiddleImage;
-  pageControl.middleDotImageActive = self.inactiveMiddleImage;
-  pageControl.rightDotImageActive = self.inactiveMiddleImage;
+	pageControl.leftDotImageActive = self.inactiveMiddleImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveMiddleImage;
 
-  XCTAssertEqualObjects([pageControl.dotsArray[0] image], self.inactiveMiddleImage);
+	XCTAssertEqualObjects(UIImagePNGRepresentation([pageControl.dotsArray[0] image]), UIImagePNGRepresentation(self.inactiveMiddleImage));
 }
 
 - (void)testPageControlCustomImagesActiveAllTheSameOthers {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  pageControl.leftDotImageActive = self.activeLeftImage;
-  pageControl.middleDotImageActive = self.activeMiddleImage;
-  pageControl.rightDotImageActive = self.activeRightImage;
+	pageControl.leftDotImageActive = self.activeLeftImage;
+	pageControl.middleDotImageActive = self.activeMiddleImage;
+	pageControl.rightDotImageActive = self.activeRightImage;
 
-  XCTAssertEqualObjects([pageControl.dotsArray[0] image], self.activeLeftImage);
+	XCTAssertEqualObjects(UIImagePNGRepresentation([pageControl.dotsArray[0] image]), UIImagePNGRepresentation(self.activeLeftImage));
 }
 
 - (void)testPageControlCustomImagesActiveLeft {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  pageControl.leftDotImageActive = self.inactiveLeftImage;
-  pageControl.middleDotImageActive = self.inactiveMiddleImage;
-  pageControl.rightDotImageActive = self.inactiveRightImage;
+	pageControl.leftDotImageActive = self.inactiveLeftImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveRightImage;
 
-  XCTAssertEqualObjects([pageControl.dotsArray[0] image], self.inactiveLeftImage);
+	XCTAssertEqualObjects(UIImagePNGRepresentation([pageControl.dotsArray[0] image]), UIImagePNGRepresentation(self.inactiveLeftImage));
 }
 
 - (void)testPageControlCustomImagesActiveLeftOthersDifferent {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 4;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 4;
 
-  pageControl.leftDotImageActive = self.inactiveLeftImage;
-  pageControl.middleDotImageActive = self.inactiveMiddleImage;
-  pageControl.rightDotImageActive = self.inactiveRightImage;
+	pageControl.leftDotImageActive = self.inactiveLeftImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveRightImage;
 
-  XCTAssertEqualObjects([pageControl.dotsArray[4] image], self.inactiveRightImage);
+	XCTAssertEqualObjects(UIImagePNGRepresentation([pageControl.dotsArray[4] image]), UIImagePNGRepresentation(self.inactiveRightImage));
 }
 
 - (void)testPageControlCustomImagesInactiveMiddle {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
 
-  pageControl.leftDotImageActive = self.inactiveLeftImage;
-  pageControl.middleDotImageActive = self.inactiveMiddleImage;
-  pageControl.rightDotImageActive = self.inactiveRightImage;
+	pageControl.leftDotImageActive = self.inactiveLeftImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveRightImage;
 
-  pageControl.leftDotImageInactive = self.inactiveLeftImage;
-  pageControl.middleDotImageInactive = self.inactiveMiddleImage;
-  pageControl.rightDotImageInactive = self.inactiveRightImage;
+	pageControl.leftDotImageInactive = self.inactiveLeftImage;
+	pageControl.middleDotImageInactive = self.inactiveMiddleImage;
+	pageControl.rightDotImageInactive = self.inactiveRightImage;
 
-  for (UIImageView *dot in pageControl.dotsArray) {
-    if (dot != [pageControl.dotsArray firstObject] && dot != [pageControl.dotsArray lastObject]) {
-      XCTAssertEqualObjects(dot.image, self.inactiveMiddleImage);
-    }
-  }
+	for (UIImageView *dot in pageControl.dotsArray) {
+		if (dot != [pageControl.dotsArray firstObject] && dot != [pageControl.dotsArray lastObject]) {
+			XCTAssertEqualObjects(UIImagePNGRepresentation(dot.image), UIImagePNGRepresentation(self.inactiveMiddleImage));
+		}
+	}
 }
 
 - (void)testPageControlCustomImagesInactiveMiddleOthersDifferent {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 4; // Arbitrary value
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 4; // Arbitrary value
 
-  pageControl.leftDotImageActive = self.inactiveLeftImage;
-  pageControl.middleDotImageActive = self.inactiveMiddleImage;
-  pageControl.rightDotImageActive = self.inactiveRightImage;
+	pageControl.leftDotImageActive = self.inactiveLeftImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveRightImage;
 
-  pageControl.leftDotImageInactive = self.inactiveLeftImage;
-  pageControl.middleDotImageInactive = self.inactiveMiddleImage;
-  pageControl.rightDotImageInactive = self.inactiveRightImage;
+	pageControl.leftDotImageInactive = self.inactiveLeftImage;
+	pageControl.middleDotImageInactive = self.inactiveMiddleImage;
+	pageControl.rightDotImageInactive = self.inactiveRightImage;
 
-  UIImage *imageLeft = (UIImage *)[pageControl.dotsArray[0] image];
-  UIImage *imageRight = (UIImage *)[pageControl.dotsArray[4] image];
+	UIImage *imageLeft = (UIImage *)[pageControl.dotsArray[0] image];
+	UIImage *imageRight = (UIImage *)[pageControl.dotsArray[4] image];
 
-  XCTAssert(imageLeft != self.inactiveMiddleImage);
-  XCTAssert(imageRight != self.inactiveMiddleImage);
+	XCTAssert(imageLeft != self.inactiveMiddleImage);
+	XCTAssert(imageRight != self.inactiveMiddleImage);
 }
 
 - (void)testPageControlMiddleDotImageActiveOnePage {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 1;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 1;
+	pageControl.currentPage = 0;
 
-  pageControl.middleDotImageActive = self.activeMiddleImage;
+	pageControl.middleDotImageActive = self.activeMiddleImage;
 
-  UIImage *imageDot = (UIImage *)[pageControl.dotsArray[0] image];
+	UIImage *imageDot = (UIImage *)[pageControl.dotsArray[0] image];
 
-  XCTAssertEqualObjects(imageDot, self.activeMiddleImage);
+	XCTAssertEqualObjects(UIImagePNGRepresentation(imageDot), UIImagePNGRepresentation(self.activeMiddleImage));
 }
 
 - (void)testPageControlMiddleImageActive {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 2;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 2;
 
-  pageControl.middleDotImageActive = self.activeMiddleImage;
+	pageControl.middleDotImageActive = self.activeMiddleImage;
 
-  UIImage *imageDot = (UIImage *)[pageControl.dotsArray[2] image];
+	UIImage *imageDot = (UIImage *)[pageControl.dotsArray[2] image];
 
-  XCTAssertEqualObjects(imageDot, self.activeMiddleImage);
+	XCTAssertEqualObjects(UIImagePNGRepresentation(imageDot), UIImagePNGRepresentation(self.activeMiddleImage));
 }
 
 #pragma mark - Properties
 
 - (void)testPageControlHidesForSinglePageFirst {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.hidesForSinglePage = YES;
-  pageControl.numberOfPages = 1;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.hidesForSinglePage = YES;
+	pageControl.numberOfPages = 1;
 
-  XCTAssertEqual(pageControl.dotsArray.count, 0);
+	XCTAssertEqual(pageControl.dotsArray.count, 0);
 }
 
 - (void)testPageControlHidesForSinglePageAfterward {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 1;
-  XCTAssertEqual(pageControl.dotsArray.count, 1);
-  pageControl.hidesForSinglePage = YES;
-  XCTAssertEqual(pageControl.dotsArray.count, 0);
-  pageControl.numberOfPages = 0;
-  XCTAssertEqual(pageControl.dotsArray.count, 0);
-  pageControl.hidesForSinglePage = NO;
-  XCTAssertEqual(pageControl.dotsArray.count, 0);
-  pageControl.numberOfPages = 1;
-  XCTAssertEqual(pageControl.dotsArray.count, 1);
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 1;
+	XCTAssertEqual(pageControl.dotsArray.count, 1);
+	pageControl.hidesForSinglePage = YES;
+	XCTAssertEqual(pageControl.dotsArray.count, 0);
+	pageControl.numberOfPages = 0;
+	XCTAssertEqual(pageControl.dotsArray.count, 0);
+	pageControl.hidesForSinglePage = NO;
+	XCTAssertEqual(pageControl.dotsArray.count, 0);
+	pageControl.numberOfPages = 1;
+	XCTAssertEqual(pageControl.dotsArray.count, 1);
 }
 
 - (void)testPageControlDefersCurrentPageDisplayBeforeUpdate {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  pageControl.defersCurrentPageDisplay = YES;
-  pageControl.currentPage = 4;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	pageControl.defersCurrentPageDisplay = YES;
+	pageControl.currentPage = 4;
 
-  XCTAssertEqualObjects([pageControl.dotsArray[4] backgroundColor], pageControl.pageIndicatorTintColor);
+	XCTAssertEqualObjects([pageControl.dotsArray[4] backgroundColor], pageControl.pageIndicatorTintColor);
 }
 
 - (void)testPageControlDefersCurrentPageDisplayAfterUpdate {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  pageControl.defersCurrentPageDisplay = YES;
-  pageControl.currentPage = 4;
-  [pageControl updateCurrentPageDisplay];
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	pageControl.defersCurrentPageDisplay = YES;
+	pageControl.currentPage = 4;
+	[pageControl updateCurrentPageDisplay];
 
-  XCTAssertEqualObjects([pageControl.dotsArray[4] backgroundColor], pageControl.currentPageIndicatorTintColor);
+	XCTAssertEqualObjects([pageControl.dotsArray[4] backgroundColor], pageControl.currentPageIndicatorTintColor);
 }
 
 - (void)testPageControlResetDotsTintColor {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 4;
-  pageControl.pageIndicatorTintColor = [UIColor redColor];
-  pageControl.pageIndicatorTintColor = nil;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 4;
+	pageControl.pageIndicatorTintColor = [UIColor redColor];
+	pageControl.pageIndicatorTintColor = nil;
 
-  XCTAssertEqualObjects([pageControl.dotsArray[0] backgroundColor], [[UIColor whiteColor] colorWithAlphaComponent:0.5f]);
+	XCTAssertEqualObjects([pageControl.dotsArray[0] backgroundColor], [[UIColor whiteColor] colorWithAlphaComponent:0.5f]);
 }
 
 - (void)testPageControlResetCurrentDotTintColor {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
-  pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-  pageControl.currentPageIndicatorTintColor = nil;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+	pageControl.currentPageIndicatorTintColor = nil;
 
-  XCTAssertEqualObjects([pageControl.dotsArray[0] backgroundColor], [UIColor whiteColor]);
+	XCTAssertEqualObjects([pageControl.dotsArray[0] backgroundColor], [UIColor whiteColor]);
+}
+
+- (void)testPageControlImageActiveTintIndicator {
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+	pageControl.applyPageIndicatorTintColor = YES;
+
+	pageControl.leftDotImageActive = self.inactiveLeftImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveRightImage;
+
+	pageControl.leftDotImageInactive = self.inactiveLeftImage;
+	pageControl.middleDotImageInactive = self.inactiveMiddleImage;
+	pageControl.rightDotImageInactive = self.inactiveRightImage;
+
+	XCTAssertEqualObjects([pageControl.dotsArray[0] tintColor], [UIColor redColor]);
+}
+
+- (void)testPageControlImageInactiveTintIndicator {
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 1;
+	pageControl.pageIndicatorTintColor = [UIColor redColor];
+	pageControl.applyPageIndicatorTintColor = YES;
+
+	pageControl.leftDotImageActive = self.inactiveLeftImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveRightImage;
+
+	pageControl.leftDotImageInactive = self.inactiveLeftImage;
+	pageControl.middleDotImageInactive = self.inactiveMiddleImage;
+	pageControl.rightDotImageInactive = self.inactiveRightImage;
+
+	XCTAssertEqualObjects([pageControl.dotsArray[0] tintColor], [UIColor redColor]);
+}
+
+- (void)testPageControlImageNoTintIndicator {
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
+	pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+
+	pageControl.leftDotImageActive = self.inactiveLeftImage;
+	pageControl.middleDotImageActive = self.inactiveMiddleImage;
+	pageControl.rightDotImageActive = self.inactiveRightImage;
+
+	pageControl.leftDotImageInactive = self.inactiveLeftImage;
+	pageControl.middleDotImageInactive = self.inactiveMiddleImage;
+	pageControl.rightDotImageInactive = self.inactiveRightImage;
+
+	XCTAssertEqualObjects([pageControl.dotsArray[0] tintColor], [UIColor whiteColor]);
 }
 
 #pragma mark - Actions
 
 - (void)testPageControlTapDot {
-  CTKPageControl *pageControl = [[CTKPageControl alloc] init];
-  pageControl.numberOfPages = 5;
-  pageControl.currentPage = 0;
+	CTKPageControl *pageControl = [[CTKPageControl alloc] init];
+	pageControl.numberOfPages = 5;
+	pageControl.currentPage = 0;
 
-  UIView *dotView = pageControl.dotsArray[2];
-  [pageControl didTapDot:dotView.gestureRecognizers[0]];
+	UIView *dotView = pageControl.dotsArray[2];
+	[pageControl didTapDot:dotView.gestureRecognizers[0]];
 
-  XCTAssertEqual(pageControl.currentPage, 2);
+	XCTAssertEqual(pageControl.currentPage, 2);
 }
 
 @end

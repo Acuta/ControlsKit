@@ -117,11 +117,13 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
     }
 
     UIView *view;
+    UIColor *color = isActive ? self.currentPageIndicatorTintColor : self.pageIndicatorTintColor;
     if (imageToUse != nil) {
       view = [[UIImageView alloc] initWithImage:imageToUse];
+      view.tintColor = self.applyPageIndicatorTintColor ? color : [UIColor whiteColor];
     } else {
       view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.dotsSize.width, self.dotsSize.height)];
-      view.backgroundColor = isActive ? self.currentPageIndicatorTintColor : self.pageIndicatorTintColor;
+      view.backgroundColor = color;
       view.layer.cornerRadius = MIN(view.bounds.size.width, view.bounds.size.height) / 2.0f;
       view.layer.masksToBounds = YES;
     }
@@ -317,6 +319,11 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
   [self updateDots];
 }
 
+- (void)setApplyPageIndicatorTintColor:(BOOL)applyPageIndicatorTintColor {
+  _applyPageIndicatorTintColor = applyPageIndicatorTintColor;
+  [self updateDots];
+}
+
 - (void)setDotsSpace:(CGFloat)dotsGauge {
   _dotsSpace = dotsGauge;
   [self updateDots];
@@ -328,32 +335,32 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
 }
 
 - (void)setLeftDotImageActive:(UIImage *)leftDotImageActive {
-  _leftDotImageActive = leftDotImageActive;
+  _leftDotImageActive = [leftDotImageActive imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self updateDots];
 }
 
 - (void)setMiddleDotImageActive:(UIImage *)middleDotImageActive {
-  _middleDotImageActive = middleDotImageActive;
+  _middleDotImageActive = [middleDotImageActive imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self updateDots];
 }
 
 - (void)setRightDotImageActive:(UIImage *)rightDotImageActive {
-  _rightDotImageActive = rightDotImageActive;
+  _rightDotImageActive = [rightDotImageActive imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self updateDots];
 }
 
 - (void)setLeftDotImageInactive:(UIImage *)leftDotImageInactive {
-  _leftDotImageInactive = leftDotImageInactive;
+  _leftDotImageInactive = [leftDotImageInactive imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self updateDots];
 }
 
 - (void)setMiddleDotImageInactive:(UIImage *)middleDotImageInactive {
-  _middleDotImageInactive = middleDotImageInactive;
+  _middleDotImageInactive = [middleDotImageInactive imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self updateDots];
 }
 
 - (void)setRightDotImageInactive:(UIImage *)rightDotImageInactive {
-  _rightDotImageInactive = rightDotImageInactive;
+  _rightDotImageInactive = [rightDotImageInactive imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self updateDots];
 }
 
