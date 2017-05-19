@@ -38,15 +38,15 @@
 
 @interface PageControlViewController () <UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet CTKPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UISwitch *setCustomImagesSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *setCustomColorsSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *applyTintToImagesSwitch;
-@property (weak, nonatomic) IBOutlet UISlider *dotsSpaceSlider;
-@property (weak, nonatomic) IBOutlet UILabel *dotsSpaceCurrentValueLabel;
-@property (weak, nonatomic) IBOutlet UIStepper *numberOfDotsStepper;
-@property (weak, nonatomic) IBOutlet UILabel *numberOfDotsCurrentValueLabel;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet CTKPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UISwitch *setCustomImagesSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *setCustomColorsSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *applyTintToImagesSwitch;
+@property (strong, nonatomic) IBOutlet UISlider *dotsSpaceSlider;
+@property (strong, nonatomic) IBOutlet UILabel *dotsSpaceCurrentValueLabel;
+@property (strong, nonatomic) IBOutlet UIStepper *numberOfDotsStepper;
+@property (strong, nonatomic) IBOutlet UILabel *numberOfDotsCurrentValueLabel;
 
 @end
 

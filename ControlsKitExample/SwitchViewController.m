@@ -30,16 +30,16 @@
 
 @interface SwitchViewController ()
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet CTKSwitch *customSwitch;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet CTKSwitch *customSwitch;
 
-@property (weak, nonatomic) IBOutlet UISwitch *applyBackgroundImageSwitchOn;
-@property (weak, nonatomic) IBOutlet UISwitch *applyBackgroundImageSwitchOff;
+@property (strong, nonatomic) IBOutlet UISwitch *applyBackgroundImageSwitchOn;
+@property (strong, nonatomic) IBOutlet UISwitch *applyBackgroundImageSwitchOff;
 
-@property (weak, nonatomic) IBOutlet UISwitch *applyBackgroundColorSwitchOn;
-@property (weak, nonatomic) IBOutlet UISwitch *applyBackgroundColorSwitchOff;
+@property (strong, nonatomic) IBOutlet UISwitch *applyBackgroundColorSwitchOn;
+@property (strong, nonatomic) IBOutlet UISwitch *applyBackgroundColorSwitchOff;
 
-@property (weak, nonatomic) IBOutlet UISwitch *applyForegroundColorSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *applyForegroundColorSwitch;
 
 @end
 
