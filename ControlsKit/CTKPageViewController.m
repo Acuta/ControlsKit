@@ -206,9 +206,11 @@ typedef void (^ CTKDisplayLinkTriggeredBlock)(CADisplayLink *displayLink);
   CTKInternalWeakTarget *weakReference = [[CTKInternalWeakTarget alloc] init];
   weakReference.reference = self;
   weakReference.selector = @selector(updateTitleViewPosition:);
-  self.displayLink = [CADisplayLink displayLinkWithTarget:weakReference selector:@selector(run:)];
-  NSRunLoop *runner = [NSRunLoop currentRunLoop];
-  [self.displayLink addToRunLoop:runner forMode:NSRunLoopCommonModes];
+
+  if (self.transitionStyle == UIPageViewControllerTransitionStyleScroll) {
+    self.displayLink = [CADisplayLink displayLinkWithTarget:weakReference selector:@selector(run:)];
+    [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+  }
 
   self.internalScrollView = (UIScrollView *)[[self class] searchForViewOfType:[UIScrollView class] inView:self.view];
   self.internalScrollView.scrollsToTop = false;
@@ -361,7 +363,7 @@ typedef void (^ CTKDisplayLinkTriggeredBlock)(CADisplayLink *displayLink);
 }
 
 - (void)setCurrentPage:(NSInteger)page animated:(BOOL)animated {
-  if (page == _currentPage) {
+  if (page < 0 || page == _currentPage || page >= self.viewControllers.count) {
     return;
   }
 
@@ -584,10 +586,6 @@ typedef void (^ CTKDisplayLinkTriggeredBlock)(CADisplayLink *displayLink);
   }
 }
 
-- (BOOL)isRegularHorizontalSizeClass {
-  return self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular;
-}
-
 - (void)setDelegate:(id<UIPageViewControllerDelegate> _Nullable)delegate {
   if (self.delegate == nil) {
     return;
@@ -608,15 +606,27 @@ typedef void (^ CTKDisplayLinkTriggeredBlock)(CADisplayLink *displayLink);
   }
 
   if (offset >= self.viewControllers.count) {
-    CGFloat offset = self.internalScrollView.contentOffset.x;
-    offset /= self.view.frame.size.width;
+    CGFloat offset;
+    if (self.navigationOrientation == UIPageViewControllerNavigationOrientationHorizontal) {
+      offset = self.internalScrollView.contentOffset.x;
+      offset /= self.view.frame.size.width;
+    } else {
+      offset = self.internalScrollView.contentOffset.y;
+      offset /= self.view.frame.size.height;
+    }
     return offset;
   }
 
+  if (self.navigationOrientation == UIPageViewControllerNavigationOrientationHorizontal) {
+    CGRect rect = [[firstVisibleViewController.view superview] convertRect:firstVisibleViewController.view.frame fromView:self.view];
+    rect.origin.x /= self.view.frame.size.width;
+    rect.origin.x += (CGFloat)offset;
+    return rect.origin.x;
+  }
   CGRect rect = [[firstVisibleViewController.view superview] convertRect:firstVisibleViewController.view.frame fromView:self.view];
-  rect.origin.x /= self.view.frame.size.width;
-  rect.origin.x += (CGFloat)offset;
-  return rect.origin.x;
+  rect.origin.y /= self.view.frame.size.height;
+  rect.origin.y += (CGFloat)offset;
+  return rect.origin.y;
 }
 
 @end

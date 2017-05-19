@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5865D63DDED56F2EAFEB11DE /* Pods_ControlsKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6B4F3CCE84503FC84C331E0 /* Pods_ControlsKitTests.framework */; };
 		F428045A1ECC5DD600185741 /* ControlsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F42804581ECC5DD600185741 /* ControlsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F42804681ECC622A00185741 /* CTKNibView.h in Headers */ = {isa = PBXBuildFile; fileRef = F42804601ECC622A00185741 /* CTKNibView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F42804691ECC622A00185741 /* CTKNibView.m in Sources */ = {isa = PBXBuildFile; fileRef = F42804611ECC622A00185741 /* CTKNibView.m */; };
@@ -38,6 +39,7 @@
 		F45E62701ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = F45E626A1ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h */; };
 		F45E62741ECDE2EB0083085A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E62731ECDE2EB0083085A /* PageViewController.swift */; };
 		F45E62761ECDE2F60083085A /* PageViewControllerTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45E62751ECDE2F60083085A /* PageViewControllerTitleView.swift */; };
+		F4DED9C71ECF299C002FC212 /* PageViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DED9C61ECF299C002FC212 /* PageViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A6B4F3CCE84503FC84C331E0 /* Pods_ControlsKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ControlsKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE895CC9AB8F0DB3ABE83297 /* Pods-ControlsKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ControlsKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ControlsKitTests/Pods-ControlsKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E0DECC53ECF0E201717AB5F9 /* Pods-ControlsKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ControlsKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ControlsKitTests/Pods-ControlsKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		F42804551ECC5DD600185741 /* ControlsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ControlsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42804581ECC5DD600185741 /* ControlsKit.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = ControlsKit.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804591ECC5DD600185741 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +92,8 @@
 		F45E626A1ECDE1FA0083085A /* CTKPageViewControllerTitleView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CTKPageViewControllerTitleView+Private.h"; sourceTree = "<group>"; };
 		F45E62731ECDE2EB0083085A /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		F45E62751ECDE2F60083085A /* PageViewControllerTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewControllerTitleView.swift; sourceTree = "<group>"; };
+		F4DED9C61ECF299C002FC212 /* PageViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewControllerTests.swift; sourceTree = "<group>"; };
+		F4DED9CA1ECF2ADA002FC212 /* ControlsKitTests-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ControlsKitTests-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,18 +109,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				F42804791ECC636700185741 /* ControlsKit.framework in Frameworks */,
+				5865D63DDED56F2EAFEB11DE /* Pods_ControlsKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E22A3459BF64D2375DE0270 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A6B4F3CCE84503FC84C331E0 /* Pods_ControlsKitTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7958CDFF5F42818B94F214A2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BE895CC9AB8F0DB3ABE83297 /* Pods-ControlsKitTests.debug.xcconfig */,
+				E0DECC53ECF0E201717AB5F9 /* Pods-ControlsKitTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F428044B1ECC5DD600185741 = {
 			isa = PBXGroup;
 			children = (
 				F42804571ECC5DD600185741 /* ControlsKit */,
 				F42804751ECC636700185741 /* ControlsKitTests */,
 				F42804561ECC5DD600185741 /* Products */,
+				7958CDFF5F42818B94F214A2 /* Pods */,
+				2E22A3459BF64D2375DE0270 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 			usesTabs = 1;
@@ -171,6 +198,8 @@
 				F42804851ECC638900185741 /* SwitchTests.m */,
 				F42804881ECC638900185741 /* TestViewController.h */,
 				F42804891ECC638900185741 /* TestViewController.m */,
+				F4DED9C61ECF299C002FC212 /* PageViewControllerTests.swift */,
+				F4DED9CA1ECF2ADA002FC212 /* ControlsKitTests-Bridging-Header.h */,
 			);
 			path = ControlsKitTests;
 			sourceTree = "<group>";
@@ -218,9 +247,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F428047C1ECC636700185741 /* Build configuration list for PBXNativeTarget "ControlsKitTests" */;
 			buildPhases = (
+				B91DB952CD758FC7194920B1 /* [CP] Check Pods Manifest.lock */,
 				F42804701ECC636700185741 /* Sources */,
 				F42804711ECC636700185741 /* Frameworks */,
 				F42804721ECC636700185741 /* Resources */,
+				2B0B1AAD6F162D3E589D1EE8 /* [CP] Embed Pods Frameworks */,
+				046269D38BBE11949B413174 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -251,6 +283,7 @@
 					F42804731ECC636700185741 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = NX49VAD8T6;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -294,6 +327,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		046269D38BBE11949B413174 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ControlsKitTests/Pods-ControlsKitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2B0B1AAD6F162D3E589D1EE8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ControlsKitTests/Pods-ControlsKitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B91DB952CD758FC7194920B1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F42804501ECC5DD600185741 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -324,6 +405,7 @@
 				F428048A1ECC638900185741 /* NibViewTest.m in Sources */,
 				F428048E1ECC638900185741 /* PlaceholderTextViewTests.m in Sources */,
 				F428048F1ECC638900185741 /* SwitchTests.m in Sources */,
+				F4DED9C71ECF299C002FC212 /* PageViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,26 +564,33 @@
 		};
 		F428047D1ECC636700185741 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE895CC9AB8F0DB3ABE83297 /* Pods-ControlsKitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NX49VAD8T6;
 				INFOPLIST_FILE = ControlsKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Acuta.ControlsKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ControlsKitTests/ControlsKitTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		F428047E1ECC636700185741 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0DECC53ECF0E201717AB5F9 /* Pods-ControlsKitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NX49VAD8T6;
 				INFOPLIST_FILE = ControlsKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Acuta.ControlsKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ControlsKitTests/ControlsKitTests-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
