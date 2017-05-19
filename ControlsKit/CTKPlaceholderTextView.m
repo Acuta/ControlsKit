@@ -37,109 +37,97 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f,
 @implementation CTKPlaceholderTextView
 
 - (id)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:frame]) {
-		[self commonInit];
-	}
-	return self;
+  if (self = [super initWithFrame:frame]) {
+    [self ctk_commonInit];
+  }
+  return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	if (self = [super initWithCoder:aDecoder]) {
-		[self commonInit];
-	}
-	return self;
+  if (self = [super initWithCoder:aDecoder]) {
+    [self ctk_commonInit];
+  }
+  return self;
 }
 
-- (void)commonInit {
-	_placeholderInsets = kCTKPlaceholderTextViewDefaultPlaceholderInset;
+- (void)ctk_commonInit {
+  _placeholderInsets = kCTKPlaceholderTextViewDefaultPlaceholderInset;
 
-	_placeholderLabel = [[UILabel alloc] init];
-	_placeholderLabel.font = self.font;
+  _placeholderLabel = [[UILabel alloc] init];
+  _placeholderLabel.font = self.font;
 
-	[self addSubview:_placeholderLabel];
-	[self updatePlaceholderFrame];
+  [self addSubview:_placeholderLabel];
+  [self updatePlaceholderFrame];
 
-	[[NSNotificationCenter defaultCenter] addObserver:self
-																					 selector:@selector(handleTextViewDidBeginEditing:)
-																							 name:UITextViewTextDidBeginEditingNotification
-																						 object:self];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-																					 selector:@selector(handleTextViewDidChange:)
-																							 name:UITextViewTextDidChangeNotification
-																						 object:self];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-																					 selector:@selector(handleTextViewDidEndEditing:)
-																							 name:UITextViewTextDidEndEditingNotification
-																						 object:self];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updatePlaceholderVisibilityFromNotification:)
+                                               name:UITextViewTextDidBeginEditingNotification
+                                             object:self];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updatePlaceholderVisibilityFromNotification:)
+                                               name:UITextViewTextDidChangeNotification
+                                             object:self];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updatePlaceholderVisibilityFromNotification:)
+                                               name:UITextViewTextDidEndEditingNotification
+                                             object:self];
 }
 
 - (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setText:(NSString *)text {
-	[super setText:text];
+  [super setText:text];
 
-	[self updatePlaceholderVisibility];
+  [self updatePlaceholderVisibilityFromNotification:nil];
 }
 
 - (void)layoutSubviews {
-	[super layoutSubviews];
+  [super layoutSubviews];
 
-	[self updatePlaceholderFrame];
+  [self updatePlaceholderFrame];
 }
 
 - (void)updatePlaceholderFrame {
-	self.placeholderLabel.frame = UIEdgeInsetsInsetRect(self.bounds, self.placeholderInsets);
+  self.placeholderLabel.frame = UIEdgeInsetsInsetRect(self.bounds, self.placeholderInsets);
 }
 
 - (void)setFont:(UIFont *)font {
-	[super setFont:font];
+  [super setFont:font];
 
-	self.placeholderLabel.font = font;
+  self.placeholderLabel.font = font;
 }
 
 - (NSString *)placeholder {
-	return self.placeholderLabel.text;
+  return self.placeholderLabel.text;
 }
 
 - (void)setPlaceholder:(NSString *)placeholder {
-	self.placeholderLabel.text = placeholder;
+  self.placeholderLabel.text = placeholder;
 
-	[self updatePlaceholderFrame];
+  [self updatePlaceholderFrame];
 }
 
 - (NSAttributedString *)attributedPlaceholder {
-	return self.placeholderLabel.attributedText;
+  return self.placeholderLabel.attributedText;
 }
 
 - (void)setAttributedPlaceholder:(NSAttributedString *)attributedPlaceholder {
-	self.placeholderLabel.attributedText = attributedPlaceholder;
+  self.placeholderLabel.attributedText = attributedPlaceholder;
 
-	[self updatePlaceholderFrame];
+  [self updatePlaceholderFrame];
 }
 
 - (void)setPlaceholderInsets:(UIEdgeInsets)placeholderInsets {
-	_placeholderInsets = placeholderInsets;
-
-	[self updatePlaceholderFrame];
+  _placeholderInsets = placeholderInsets;
+  
+  [self updatePlaceholderFrame];
 }
 
-- (void)handleTextViewDidBeginEditing:(NSNotification *)notification {
-	[self updatePlaceholderVisibility];
-}
-
-- (void)handleTextViewDidChange:(NSNotification *)notification {
-	[self updatePlaceholderVisibility];
-}
-
-- (void)handleTextViewDidEndEditing:(NSNotification *)notification {
-	[self updatePlaceholderVisibility];
-}
-
-- (void)updatePlaceholderVisibility {
-	self.placeholderLabel.hidden = self.text.length > 0;
-	[self sendSubviewToBack:self.placeholderLabel];
+- (void)updatePlaceholderVisibilityFromNotification:(NSNotification *)notification {
+  self.placeholderLabel.hidden = self.text.length > 0;
+  [self sendSubviewToBack:self.placeholderLabel];
 }
 
 @end

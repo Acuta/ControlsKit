@@ -44,29 +44,29 @@
 
 /* Begin PBXFileReference section */
 		F42804551ECC5DD600185741 /* ControlsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ControlsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F42804581ECC5DD600185741 /* ControlsKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlsKit.h; sourceTree = "<group>"; };
+		F42804581ECC5DD600185741 /* ControlsKit.h */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = ControlsKit.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804591ECC5DD600185741 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F42804601ECC622A00185741 /* CTKNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTKNibView.h; sourceTree = "<group>"; };
-		F42804611ECC622A00185741 /* CTKNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTKNibView.m; sourceTree = "<group>"; };
-		F42804621ECC622A00185741 /* CTKPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTKPageControl.h; sourceTree = "<group>"; };
-		F42804631ECC622A00185741 /* CTKPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTKPageControl.m; sourceTree = "<group>"; };
-		F42804641ECC622A00185741 /* CTKPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTKPlaceholderTextView.h; sourceTree = "<group>"; };
-		F42804651ECC622A00185741 /* CTKPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTKPlaceholderTextView.m; sourceTree = "<group>"; };
-		F42804661ECC622A00185741 /* CTKSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTKSwitch.h; sourceTree = "<group>"; };
-		F42804671ECC622A00185741 /* CTKSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTKSwitch.m; sourceTree = "<group>"; };
+		F42804601ECC622A00185741 /* CTKNibView.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = CTKNibView.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804611ECC622A00185741 /* CTKNibView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = CTKNibView.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804621ECC622A00185741 /* CTKPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = CTKPageControl.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804631ECC622A00185741 /* CTKPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = CTKPageControl.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804641ECC622A00185741 /* CTKPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = CTKPlaceholderTextView.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804651ECC622A00185741 /* CTKPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = CTKPlaceholderTextView.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804661ECC622A00185741 /* CTKSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = CTKSwitch.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804671ECC622A00185741 /* CTKSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = CTKSwitch.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804741ECC636700185741 /* ControlsKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ControlsKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42804781ECC636700185741 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F428047F1ECC638900185741 /* NibViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibViewTest.h; sourceTree = "<group>"; };
-		F42804801ECC638900185741 /* NibViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewTest.m; sourceTree = "<group>"; };
+		F428047F1ECC638900185741 /* NibViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = NibViewTest.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804801ECC638900185741 /* NibViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NibViewTest.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804811ECC638900185741 /* NibViewTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibViewTest.xib; sourceTree = "<group>"; };
-		F42804821ECC638900185741 /* NibViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibViewTests.m; sourceTree = "<group>"; };
-		F42804831ECC638900185741 /* PageControlTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageControlTests.m; sourceTree = "<group>"; };
-		F42804841ECC638900185741 /* PlaceholderTextViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTextViewTests.m; sourceTree = "<group>"; };
-		F42804851ECC638900185741 /* SwitchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchTests.m; sourceTree = "<group>"; };
+		F42804821ECC638900185741 /* NibViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = NibViewTests.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804831ECC638900185741 /* PageControlTests.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = PageControlTests.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804841ECC638900185741 /* PlaceholderTextViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = PlaceholderTextViewTests.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804851ECC638900185741 /* SwitchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SwitchTests.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804861ECC638900185741 /* Tests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tests.storyboard; sourceTree = "<group>"; };
 		F42804871ECC638900185741 /* Tests.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Tests.xcassets; sourceTree = "<group>"; };
-		F42804881ECC638900185741 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		F42804891ECC638900185741 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		F42804881ECC638900185741 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804891ECC638900185741 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F42804BE1ECC88BC00185741 /* NibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibView.swift; sourceTree = "<group>"; };
 		F42804C01ECC88C200185741 /* PageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		F42804C21ECC88CC00185741 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
@@ -100,6 +100,7 @@
 				F42804561ECC5DD600185741 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		F42804561ECC5DD600185741 /* Products */ = {
 			isa = PBXGroup;

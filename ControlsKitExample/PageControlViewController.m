@@ -38,15 +38,15 @@
 
 @interface PageControlViewController () <UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet CTKPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UISwitch *setCustomImagesSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *setCustomColorsSwitch;
-@property (weak, nonatomic) IBOutlet UISwitch *applyTintToImagesSwitch;
-@property (weak, nonatomic) IBOutlet UISlider *dotsSpaceSlider;
-@property (weak, nonatomic) IBOutlet UILabel *dotsSpaceCurrentValueLabel;
-@property (weak, nonatomic) IBOutlet UIStepper *numberOfDotsStepper;
-@property (weak, nonatomic) IBOutlet UILabel *numberOfDotsCurrentValueLabel;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet CTKPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UISwitch *setCustomImagesSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *setCustomColorsSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *applyTintToImagesSwitch;
+@property (strong, nonatomic) IBOutlet UISlider *dotsSpaceSlider;
+@property (strong, nonatomic) IBOutlet UILabel *dotsSpaceCurrentValueLabel;
+@property (strong, nonatomic) IBOutlet UIStepper *numberOfDotsStepper;
+@property (strong, nonatomic) IBOutlet UILabel *numberOfDotsCurrentValueLabel;
 
 @end
 
@@ -54,13 +54,13 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
+
   [self.dotsSpaceSlider addTarget:self action:@selector(dotsSpaceSliderDidChange:) forControlEvents:UIControlEventValueChanged];
   self.dotsSpaceSlider.minimumValue = kPageControlDotsMinSpace;
   self.dotsSpaceSlider.maximumValue = kPageControlDotsMaxSpace;
   self.dotsSpaceSlider.value = kPageControlDotsSpaceDefaultValue;
   self.dotsSpaceCurrentValueLabel.text = [NSString stringWithFormat:@"%.2f", self.dotsSpaceSlider.value];
-  
+
   [self.numberOfDotsStepper addTarget:self action:@selector(numberOfDotsStepperDidChange:) forControlEvents:UIControlEventValueChanged];
   self.numberOfDotsStepper.minimumValue = kNumberOfDotsMinValue;
   self.numberOfDotsStepper.maximumValue = kNumberOfDotsMaxValue;
@@ -70,7 +70,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  
+
   [self setupColorViewsToDisplay];
 }
 
@@ -78,19 +78,19 @@
   if (theSwitch.isOn) {
     self.pageControl.leftDotImageActive = [UIImage imageNamed:@"Carousel-Left-Active"];
     self.pageControl.leftDotImageInactive = [UIImage imageNamed:@"Carousel-Left-Inactive"];
-    
+
     self.pageControl.middleDotImageActive = [UIImage imageNamed:@"Carousel-Middle-Active"];
     self.pageControl.middleDotImageInactive = [UIImage imageNamed:@"Carousel-Middle-Inactive"];
-    
+
     self.pageControl.rightDotImageActive = [UIImage imageNamed:@"Carousel-Right-Active"];
     self.pageControl.rightDotImageInactive = [UIImage imageNamed:@"Carousel-Right-Inactive"];
   } else {
     self.pageControl.leftDotImageActive = nil;
     self.pageControl.leftDotImageInactive = nil;
-    
+
     self.pageControl.middleDotImageActive = nil;
     self.pageControl.middleDotImageInactive = nil;
-    
+
     self.pageControl.rightDotImageActive = nil;
     self.pageControl.rightDotImageInactive = nil;
   }
@@ -139,15 +139,15 @@
 
 - (void)setupColorViewsToDisplay {
   NSArray *colorsArray = [[NSArray alloc] initWithObjects:[UIColor orangeColor], [UIColor magentaColor], [UIColor purpleColor], [UIColor brownColor], [UIColor cyanColor], nil];
-  
+
   self.pageControl.numberOfPages = colorsArray.count;
-  
+
   for (NSInteger i = 0; i < [colorsArray count]; i++) {
     UIView *contentView = [[UIImageView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width * i, 0.0f, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
     contentView.backgroundColor = colorsArray[i];
     [self.scrollView addSubview:contentView];
   }
-  
+
   self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * colorsArray.count, self.scrollView.frame.size.height);
 }
 

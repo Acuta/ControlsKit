@@ -42,10 +42,10 @@
 		F42804AB1ECC66BD00185741 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F42804AD1ECC66BD00185741 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F42804B31ECC66CC00185741 /* ControlsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ControlsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F42804B81ECC6FD700185741 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; };
-		F42804B91ECC6FD700185741 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; };
-		F42804BB1ECC72DB00185741 /* PageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageControlViewController.h; sourceTree = "<group>"; };
-		F42804BC1ECC72DB00185741 /* PageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageControlViewController.m; sourceTree = "<group>"; };
+		F42804B81ECC6FD700185741 /* SwitchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = SwitchViewController.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804B91ECC6FD700185741 /* SwitchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SwitchViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804BB1ECC72DB00185741 /* PageControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; path = PageControlViewController.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
+		F42804BC1ECC72DB00185741 /* PageControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = PageControlViewController.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F476541C1ECC998F0066A20C /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F476541D1ECC998F0066A20C /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		F47654221ECC9C820066A20C /* NibViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibViewViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +71,7 @@
 				F428049D1ECC66BD00185741 /* Products */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		F428049D1ECC66BD00185741 /* Products */ = {
 			isa = PBXGroup;
