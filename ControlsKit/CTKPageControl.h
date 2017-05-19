@@ -68,6 +68,11 @@ extern const CGSize kCTKPageControlDefaultSize;
 @property (nonatomic, strong, nullable) IBInspectable UIColor *currentPageIndicatorTintColor UI_APPEARANCE_SELECTOR;
 
 /**
+ *  Whether or not to apply the pageIndicatorTintColor and the currentPageIndicatorTintColor to the images.
+ */
+@property (nonatomic, assign) IBInspectable BOOL applyPageIndicatorTintColor UI_APPEARANCE_SELECTOR;
+
+/**
  *  Set the value of this property to true so that, when the user taps the control to go to a new page, the class defers updating the page control until it calls updateCurrentPageDisplay.
  *  Set the value to NO (the default) to have the page control updated immediately.
  */
