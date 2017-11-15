@@ -26,7 +26,7 @@
 
 #import "CTKPlaceholderTextView.h"
 
-const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f, 9.0f, 4.0f};
+const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = { 0.0f, 4.0f, 0.0f, 4.0f };
 
 @interface CTKPlaceholderTextView ()
 
@@ -55,6 +55,7 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f,
 
   _placeholderLabel = [[UILabel alloc] init];
   _placeholderLabel.font = self.font;
+  _placeholderLabel.textColor = UIColor.darkGrayColor;
 
   [self addSubview:_placeholderLabel];
   [self updatePlaceholderFrame];
@@ -90,13 +91,23 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = {8.0f, 4.0f,
 }
 
 - (void)updatePlaceholderFrame {
-  self.placeholderLabel.frame = UIEdgeInsetsInsetRect(self.bounds, self.placeholderInsets);
+  CGFloat verticalOffset = self.textContainerInset.top + self.textContainerInset.bottom + self.placeholderInsets.top + self.placeholderInsets.bottom;
+  self.placeholderLabel.frame = UIEdgeInsetsInsetRect(UIEdgeInsetsInsetRect(CGRectMake(0.0f, 0.0f, self.bounds.size.width, verticalOffset), self.textContainerInset), self.placeholderInsets);
+  [self.placeholderLabel sizeToFit];
+  CGFloat maxHeight = MAX(0.0, self.bounds.size.height - verticalOffset);
+  if (self.placeholderLabel.frame.size.height >= maxHeight) {
+    CGRect frame = self.placeholderLabel.frame;
+    frame.size.height = maxHeight;
+    self.placeholderLabel.frame = frame;
+  }
 }
 
 - (void)setFont:(UIFont *)font {
   [super setFont:font];
 
   self.placeholderLabel.font = font;
+
+  [self updatePlaceholderFrame];
 }
 
 - (NSString *)placeholder {
