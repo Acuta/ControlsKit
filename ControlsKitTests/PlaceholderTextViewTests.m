@@ -80,11 +80,22 @@
   textView.text = @"Text";
   XCTAssertEqual(textView.placeholderLabel.frame.origin.x, kCTKPlaceholderTextViewDefaultPlaceholderInset.left);
   textView.placeholderInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 5.0f);
-  XCTAssertEqual(textView.placeholderLabel.frame.size.width, 45.0f);
+  XCTAssertLessThanOrEqual(textView.placeholderLabel.frame.size.width, 45.0f);
   textView.placeholderInsets = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
   textView.frame = CGRectMake(0.0f, 0.0f, 30.0f, 30.0f);
   [textView layoutIfNeeded];
-  XCTAssertEqual(textView.placeholderLabel.frame.size.width, 30.0f);
+  XCTAssertLessThanOrEqual(textView.placeholderLabel.frame.size.width, 30.0f);
+}
+
+- (void)testPlaceholderHeight {
+  CTKPlaceholderTextView * textView = [[CTKPlaceholderTextView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 5.0f)];
+  XCTAssertEqual(textView.placeholderLabel.frame.origin.x, kCTKPlaceholderTextViewDefaultPlaceholderInset.left);
+  textView.textContainerInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+  textView.placeholder = @"Text";
+  XCTAssertEqual(textView.placeholderLabel.frame.size.height, 5.0f);
+  textView.textContainerInset = UIEdgeInsetsMake(0.0f, 0.0f, 4.0f, 0.0f);
+  [textView layoutIfNeeded];
+  XCTAssertEqual(textView.placeholderLabel.frame.size.height, 1.0f);
 }
 
 - (void)testPlaceholderText {
