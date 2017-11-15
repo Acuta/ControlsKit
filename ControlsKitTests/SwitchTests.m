@@ -92,6 +92,17 @@
   XCTAssertNotEqualObjects(theSwitch.backgroundColor, [UIColor redColor]);
 }
 
+- (void)testOnAnimation {
+  CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
+  [theSwitch setOn:YES animated:YES];
+
+  XCTAssertEqual(theSwitch.isOn, YES);
+
+  [theSwitch setOn:NO animated:YES];
+
+  XCTAssertEqual(theSwitch.isOn, NO);
+}
+
 - (void)testOnBackgroundPicture {
   CTKSwitch *theSwitch = [[CTKSwitch alloc] init];
   theSwitch.onImage = self.image;
