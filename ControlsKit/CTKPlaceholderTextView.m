@@ -84,6 +84,12 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = { 0.0f, 4.0f
   [self updatePlaceholderVisibilityFromNotification:nil];
 }
 
+- (void)setAttributedText:(NSAttributedString *)attributedText {
+	[super setAttributedText:attributedText];
+
+	[self updatePlaceholderVisibilityFromNotification:nil];
+}
+
 - (void)layoutSubviews {
   [super layoutSubviews];
 
