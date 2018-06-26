@@ -34,6 +34,7 @@
 @property (nonatomic, weak) UILabel * placeholderLabel;
 
 - (void)userSetText:(NSString *)text;
+- (void)userSetAttributedText:(NSAttributedString *)attributedText;
 
 @end
 
@@ -42,6 +43,10 @@
 
 - (void)userSetText:(NSString *)text {
   [super setText:text];
+}
+
+- (void)userSetAttributedText:(NSAttributedString *)attributedText {
+  [super setAttributedText:attributedText];
 }
 
 @end
@@ -119,15 +124,26 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidBeginEditingNotification object:textView userInfo:nil];
   XCTAssertFalse(textView.placeholderLabel.hidden);
   [textView userSetText:@"t"];
+  XCTAssertTrue(textView.placeholderLabel.hidden);
+  [textView userSetText:@""];
+  XCTAssertFalse(textView.placeholderLabel.hidden);
+  [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidEndEditingNotification object:textView userInfo:nil];
+  XCTAssertFalse(textView.placeholderLabel.hidden);
+  [textView userSetAttributedText:[[NSAttributedString alloc] initWithString:@"t"]];
   XCTAssertFalse(textView.placeholderLabel.hidden);
   [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView userInfo:nil];
   XCTAssertTrue(textView.placeholderLabel.hidden);
-  [textView userSetText:@""];
-  XCTAssertTrue(textView.placeholderLabel.hidden);
+  [textView userSetAttributedText:[[NSAttributedString alloc] initWithString:@""]];
   [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView userInfo:nil];
   XCTAssertFalse(textView.placeholderLabel.hidden);
   [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidEndEditingNotification object:textView userInfo:nil];
   XCTAssertFalse(textView.placeholderLabel.hidden);
+}
+
+- (void)testPlaceholderFontAdjust {
+  CTKPlaceholderTextView * textView = [[CTKPlaceholderTextView alloc] initWithFrame:CGRectZero];
+  textView.adjustsFontForContentSizeCategory = YES;
+  XCTAssertTrue(textView.placeholderLabel.adjustsFontForContentSizeCategory);
 }
 
 @end
