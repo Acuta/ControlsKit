@@ -45,6 +45,10 @@
   [super setText:text];
 }
 
+- (void)userSetAttributedText:(NSAttributedString *)attributedText {
+  [super setAttributedText:attributedText];
+}
+
 @end
 
 @interface PlaceholderTextViewTests : XCTestCase
@@ -134,6 +138,12 @@
   XCTAssertFalse(textView.placeholderLabel.hidden);
   [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidEndEditingNotification object:textView userInfo:nil];
   XCTAssertFalse(textView.placeholderLabel.hidden);
+}
+
+- (void)testPlaceholderFontAdjust {
+  CTKPlaceholderTextView * textView = [[CTKPlaceholderTextView alloc] initWithFrame:CGRectZero];
+  textView.adjustsFontForContentSizeCategory = YES;
+  XCTAssertTrue(textView.placeholderLabel.adjustsFontForContentSizeCategory);
 }
 
 @end

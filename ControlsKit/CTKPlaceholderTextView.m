@@ -96,6 +96,12 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = { 0.0f, 4.0f
   [self updatePlaceholderFrame];
 }
 
+- (void)setAdjustsFontForContentSizeCategory:(BOOL)adjustsFontForContentSizeCategory {
+	[super setAdjustsFontForContentSizeCategory:adjustsFontForContentSizeCategory];
+
+	self.placeholderLabel.adjustsFontForContentSizeCategory = adjustsFontForContentSizeCategory;
+}
+
 - (void)updatePlaceholderFrame {
   CGFloat verticalOffset = self.textContainerInset.top + self.textContainerInset.bottom + self.placeholderInsets.top + self.placeholderInsets.bottom;
   self.placeholderLabel.frame = UIEdgeInsetsInsetRect(UIEdgeInsetsInsetRect(CGRectMake(0.0f, 0.0f, self.bounds.size.width, verticalOffset), self.textContainerInset), self.placeholderInsets);
@@ -138,7 +144,7 @@ const UIEdgeInsets kCTKPlaceholderTextViewDefaultPlaceholderInset = { 0.0f, 4.0f
 
 - (void)setPlaceholderInsets:(UIEdgeInsets)placeholderInsets {
   _placeholderInsets = placeholderInsets;
-  
+
   [self updatePlaceholderFrame];
 }
 
