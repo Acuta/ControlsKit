@@ -50,13 +50,6 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
 
 @implementation CTKPageControl
 
-- (instancetype)init {
-  if (self = [super init]) {
-    [self setUp];
-  }
-  return self;
-}
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
   if (self = [super initWithCoder:aDecoder]) {
     [self setUp];
@@ -84,7 +77,14 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  [self updateDots];
+
+  [self updateDotsFrame];
+}
+
+- (void)updateDotsFrame {
+  for (NSUInteger i = 0; i < self.dotsArray.count; ++i) {
+    self.dotsArray[i].frame = CGRectMake([self xOriginForDotAtIndex:i], (self.frame.size.height - self.dotsArray[i].frame.size.height) / 2.0f, self.dotsArray[i].frame.size.width, self.dotsArray[i].frame.size.height);
+  }
 }
 
 - (void)updateDots {
@@ -128,12 +128,12 @@ const CGSize kCTKPageControlDefaultSize = {7.0f, 7.0f};
       view.layer.masksToBounds = YES;
     }
 
-    view.frame = CGRectMake([self xOriginForDotAtIndex:i], (self.frame.size.height - view.frame.size.height) / 2.0f, view.frame.size.width, view.frame.size.height);
     [self addSubview:view];
     [self.dotsArray addObject:view];
     [view addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapDot:)]];
   }
 
+  [self updateDotsFrame];
   [self invalidateIntrinsicContentSize];
 }
 
